@@ -38,13 +38,12 @@ This app combines motion-based interaction with modern Android development pract
 ---
 
 ## 📂 Project Structure
-📦 Shake2Play
-┣ 📂 ui              # Compose UI components
-┣ 📂 navigation      # Navigation3 setup
-┣ 📂 sounds          # Sound assets and playback logic
-┣ 📂 tests           # Unit & instrumentation tests
-┗ 📜 README.md       # Project documentation
-
+📦 Shake2Play <br>
+    ┣ 📂 ui              # Compose UI components <br>
+    ┣ 📂 navigation      # Navigation3 setup <br>
+    ┣ 📂 sounds          # Sound assets and playback logic <br>
+    ┣ 📂 tests           # Unit & instrumentation tests <br>
+    ┗ 📜 README.md       # Project documentation 
 
 ---
 
