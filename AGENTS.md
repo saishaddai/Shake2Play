@@ -67,3 +67,24 @@ This repository is a Kotlin Multiplatform project using Compose Multiplatform. T
 - Do not commit generated build output, local IDE state, machine-specific paths, or large derived artifacts unless the repository explicitly requires them.
 - Update relevant documentation when changing setup, supported targets, user-visible behavior, or developer workflows.
 - Keep comments focused on non-obvious rationale or constraints; do not narrate straightforward code.
+
+## GitHub issue workflow
+
+- When a task depends on a tracked bug, feature, or improvement, inspect the repository's open issues before making changes.
+- Use the repository's GitHub issue workflow as the source of truth for planned work. Do not create duplicate issues for the same root cause.
+- Before creating a new issue, confirm the task is not already tracked and gather the required context: summary, expected behavior, current behavior, reproduction steps, and acceptance criteria.
+- Do not create or update GitHub issues without an explicit repository context and an appropriate reason. Treat issue changes as operational metadata, not code changes.
+- Keep issue bodies factual and concise. Never include secrets, tokens, private URLs, credentials, or user data.
+- If the project uses a GitHub-connected tool or MCP server, that integration must be scoped to the current repository, with the minimum required permissions only.
+- Only read, create, update, or close issues that are explicitly relevant to this repository. Do not touch unrelated repositories or organization settings.
+- Prefer issue comments and updates over broad or undocumented changes. Record the outcome, links to implementation, and any validation status when appropriate.
+- If the environment cannot reach GitHub or the required token is unavailable, state the limitation and continue with local work without claiming the issue was updated.
+- Never claim an issue was created or modified unless the operation was actually confirmed by the connected GitHub tool or API.
+
+## GitHub integration guardrails
+
+- Store GitHub credentials or access tokens outside the repository. Never commit them to source control or documentation.
+- Limit issue-management access to the current repository and the minimum set of permissions needed for listing, reading, creating, commenting on, and updating issues.
+- Do not allow issue automation to perform unrelated GitHub actions such as repository configuration changes, branch administration, or release publication unless explicitly approved.
+- Keep issue automation architecture transparent and auditable. Document which operations are allowed and which are blocked.
+- Treat issue automation as a support tool for project coordination, not as an unrestricted external action channel for the AI.
