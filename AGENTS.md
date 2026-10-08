@@ -33,6 +33,27 @@ This repository is a Kotlin Multiplatform project using Compose Multiplatform. T
 - Keep resource lookup and platform-specific resource behavior compatible with the configured targets. Do not assume Android resource APIs are available in common code.
 - Avoid blocking the main thread. Dispatch work using the project's established coroutine and dispatcher abstractions, especially in common code.
 
+## App architecture rules
+
+- Keep the application architecture simple and explicit: shared domain logic, shared UI where appropriate, and platform-specific adapters only where required.
+- Put reusable business rules and data models in shared code. Keep platform-only concerns such as sensors, system permissions, audio routing, native lifecycle hooks, and OS integrations in platform-specific modules.
+- Prefer a small number of boundaries: common logic, UI layer, and platform adapters. Do not introduce unnecessary abstraction layers for trivial code.
+- Keep screen state and view behavior separate from long-running work. If a feature needs async work, use the project's existing coroutines and state representation patterns rather than embedding side effects in composables.
+- Prefer one clear ownership model for each feature: one owner for business logic, one owner for UI composition, and one owner for platform integration when needed.
+- Keep navigation, sound playback, motion handling, and data flow predictable and testable. Do not scatter platform-specific logic across unrelated modules.
+- When adding a new feature, decide early whether it is common, shared-UI, or platform-specific. Do not mix those responsibilities in the same class or file unless the code genuinely requires it.
+- Treat the module structure as the product architecture. If a feature belongs to shared logic, place it in common code; if it belongs to a device capability, place it in the platform layer.
+
+## Basic module and package conventions
+
+- Keep feature folders grouped by business capability, not by technical convenience. A common pattern is: `featureName/`, `featureName/ui/`, `featureName/domain/`, and `featureName/data/` when the scope requires it.
+- In shared code, prefer package names that reflect the domain and capability. Avoid generic packages such as `utils`, `common`, or `misc` unless the code is legitimately cross-cutting.
+- In platform-specific code, keep adapter and integration code near the platform boundary, not spread across unrelated screens.
+- Keep each feature cohesive: place models, state, use cases, and UI relevant to the same feature in the same feature area when possible.
+- If a high-level feature has shared and platform-specific pieces, keep the common contract small and the platform-specific implementation behind that contract.
+- Do not create deep folder nesting for every tiny helper. Favor a small number of feature packages with clear responsibilities.
+- Prefer naming that describes the business role of the code rather than the implementation detail. For example, `soundPlayback` or `shakeDetection` is clearer than generic wrappers or adapter-only names.
+
 ## Swift and Apple-platform interop
 
 - Follow the existing Swift style in Apple app targets: `UpperCamelCase` for types and `lowerCamelCase` for properties, methods, and local values. Preserve established API naming at language boundaries.
