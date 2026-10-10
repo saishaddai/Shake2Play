@@ -11,6 +11,14 @@ This repository is a Kotlin Multiplatform project using Compose Multiplatform. T
 - Do not silently change product behavior, supported platforms, minimum OS versions, dependency versions, or build configuration outside the task's scope.
 - Do not claim a build or test passed unless it was run. Report relevant checks that could not be run and why.
 
+## AI tool capability policy
+
+- Before using specialized tools, select the narrowest relevant capability profile from `ai-tools/profiles/` and follow its allowed actions and boundaries.
+- Tool profiles are repository policy, not technical access controls. Actual tool availability and permission enforcement must be configured in the AI runtime or tool server.
+- Use only tools needed for the current task. Do not use media, device, network, or repository-write capabilities unless the task and selected profile require them.
+- If a needed capability is unavailable, do not substitute a broader or unrelated tool without authorization; explain the limitation.
+- Ask before actions with external side effects, including uploading assets, recording audio, accessing personal accounts or data, or changing device settings.
+
 ## Kotlin conventions
 
 - Follow Kotlin style and the conventions used in the surrounding module. Use `UpperCamelCase` for types, `lowerCamelCase` for properties and functions, and `UPPER_SNAKE_CASE` for constants when appropriate.

@@ -6,6 +6,7 @@ This file helps humans and agents find the intended ownership of code and config
 
 - `docs/`: project architecture, build/test guidance, and decision records.
 - `skills/`: reusable task instructions for recurring work patterns.
+- `ai-tools/`: vendor-neutral capability profiles describing which tool actions are appropriate for task types.
 - `mcp/`: documentation for Model Context Protocol integrations when the project uses them.
 - `scripts/`: local automation and validation helpers.
 - `shared/`: shared KMP logic and cross-platform models.
