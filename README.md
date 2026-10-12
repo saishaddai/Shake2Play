@@ -6,16 +6,14 @@
 ![Tests](https://img.shields.io/badge/Tests-Unit_&_Instrumentation-yellow)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-Welcome to **Shake2Play** — an Android project that lets you **play a set of sounds by shaking your phone**.  
-This app combines motion-based interaction with modern Android development practices to deliver a fun and engaging experience.
+Welcome to **Shake2Play** — a Kotlin Multiplatform app for Android and iOS that lets you **play a set of sounds by shaking your phone**. Both apps share their interface using Compose Multiplatform, with native integrations kept at each platform boundary.
 
 ---
 
 ## 📱 About the Project
 - Trigger sound playback by **shaking the device**.
-- Showcase modern Android development with **Kotlin** and **Jetpack Compose**.
-- Implement **Navigation 3** for seamless screen transitions.
-- Explore **MCP (Multiplatform Compose Project)** for cross-platform potential.
+- Share the application UI across Android and iOS with **Kotlin Multiplatform** and **Compose Multiplatform**.
+- Implement **Navigation 3** for screen transitions.
 - Ensure quality with **Unit Tests** and **Instrumentation Tests**.
 
 ---
@@ -30,20 +28,16 @@ This app combines motion-based interaction with modern Android development pract
 
 ## 🛠️ Tech Stack
 - **Kotlin**  
-- **Jetpack Compose**  
+- **Compose Multiplatform**
+- **Kotlin Multiplatform**
 - **Navigation 3**  
 - **MCP (Multiplatform Compose Project)**  
 - **Unit & Instrumentation Tests**  
 
 ---
 
-## 📂 Project Structure
-📦 Shake2Play <br>
-    ┣ 📂 ui              # Compose UI components <br>
-    ┣ 📂 navigation      # Navigation3 setup <br>
-    ┣ 📂 sounds          # Sound assets and playback logic <br>
-    ┣ 📂 tests           # Unit & instrumentation tests <br>
-    ┗ 📜 README.md       # Project documentation 
+## Project Structure
+Shared screens, navigation, and feature logic belong in the common source set of the Compose application module. Android and iOS source sets provide native entry points and platform integrations; both hosts launch the shared Compose UI. See [docs/architecture.md](docs/architecture.md) for the recommended source layout and ownership rules. The checked-in Gradle configuration defines the actual modules and targets.
 
 ---
 
@@ -52,8 +46,8 @@ This app combines motion-based interaction with modern Android development pract
    ```bash
    git clone https://github.com/your-username/Shake2Play.git
    ```
-2. Open the project in Android Studio.
-3. Run the app on an emulator or physical device.
+2. Open the project in Android Studio or the configured IDE.
+3. Run the Android or iOS app using the target and host setup available in the project.
 4. Shake your phone to play sounds!
 
 ## 📸 Screenshots

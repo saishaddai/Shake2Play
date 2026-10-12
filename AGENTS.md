@@ -35,18 +35,22 @@ This repository is a Kotlin Multiplatform project using Compose Multiplatform. T
 
 - Check the configured targets and source-set hierarchy before placing code or tests. Common code must not depend on JVM-, Android-, Apple-, or other target-specific APIs.
 - Keep platform integrations behind narrow APIs and implement them in the appropriate platform source set. Do not duplicate shared business rules across targets.
-- Put reusable UI in the existing shared Compose source set when the UI is intended to be shared. Keep OS-specific UI, lifecycle integration, permissions, and service wiring in the platform app unless the project has an established alternative.
-- Keep composables focused on rendering and UI events. Hoist state to the existing state holder or screen-level owner; do not perform long-running work or side effects directly during composition.
+- Android and iOS are both first-class targets, and app screens should use the shared Compose UI by default. Put shared screens, navigation, design system, and reusable UI in the existing common Compose source set. Platform entry points should host that shared UI rather than reimplement screens.
+- Keep OS-specific UI, lifecycle integration, permissions, and native service wiring in the platform source set or app host that owns them. Do not move SwiftUI/UIKit or Android framework types into common code.
+- Keep composables focused on rendering immutable state and emitting user actions. Put screen state and event handling in the established screen-level state holder (for example, a presenter or ViewModel only if that pattern and a compatible KMP implementation already exist). Expose observable state using the project's existing flow/state conventions; do not start long-running work or perform side effects during composition.
+- Keep navigation in the shared UI layer when routes and destinations are shared. Isolate platform-specific navigation or lifecycle bridges at the host boundary.
 - Use stable, meaningful keys in lazy layouts. Keep UI state saveable only where restoration is a product requirement and supported by the project's architecture.
 - Keep resource lookup and platform-specific resource behavior compatible with the configured targets. Do not assume Android resource APIs are available in common code.
 - Avoid blocking the main thread. Dispatch work using the project's established coroutine and dispatcher abstractions, especially in common code.
 
 ## App architecture rules
 
-- Keep the application architecture simple and explicit: shared domain logic, shared UI where appropriate, and platform-specific adapters only where required.
-- Put reusable business rules and data models in shared code. Keep platform-only concerns such as sensors, system permissions, audio routing, native lifecycle hooks, and OS integrations in platform-specific modules.
-- Prefer a small number of boundaries: common logic, UI layer, and platform adapters. Do not introduce unnecessary abstraction layers for trivial code.
-- Keep screen state and view behavior separate from long-running work. If a feature needs async work, use the project's existing coroutines and state representation patterns rather than embedding side effects in composables.
+- Follow the proposed structure in `docs/architecture.md` as the default for new code, but treat checked-in Gradle configuration and source layout as authoritative. Do not create the illustrative modules or packages unless they fit the actual project.
+- Organize app code by feature, then by responsibility inside a feature. A feature owns its shared UI, presentation state, and feature-specific domain/data code; do not create top-level technical-layer folders that scatter a feature across the repository.
+- Put shared business rules and platform-independent models in common code. Put native integrations (for example, Android sensor APIs, permissions, audio routing, and Apple lifecycle hooks) behind small common contracts with implementations in the appropriate platform source sets. Use a multiplatform library only when it is already established or clearly preferable to native adapters.
+- Keep dependencies flowing inward: UI/presentation may call domain behavior; domain must not depend on Compose, platform APIs, or data implementations; data implements domain-facing contracts where such a boundary is needed. Avoid adding interfaces, use cases, repositories, or modules that do not solve a real dependency or testing need.
+- Keep screen state and view behavior separate from long-running work. Use the project's existing coroutine scope, state, and error conventions; expose expected failures as explicit results or UI state rather than swallowing exceptions.
+- Keep shared UI, domain behavior, and platform adapters as the primary boundaries. Add a Gradle module only for a meaningful build, ownership, reuse, or dependency-isolation boundary, not merely to mirror package names.
 - Prefer one clear ownership model for each feature: one owner for business logic, one owner for UI composition, and one owner for platform integration when needed.
 - Keep navigation, sound playback, motion handling, and data flow predictable and testable. Do not scatter platform-specific logic across unrelated modules.
 - When adding a new feature, decide early whether it is common, shared-UI, or platform-specific. Do not mix those responsibilities in the same class or file unless the code genuinely requires it.
@@ -54,7 +58,7 @@ This repository is a Kotlin Multiplatform project using Compose Multiplatform. T
 
 ## Basic module and package conventions
 
-- Keep feature folders grouped by business capability, not by technical convenience. A common pattern is: `featureName/`, `featureName/ui/`, `featureName/domain/`, and `featureName/data/` when the scope requires it.
+- Use the feature-first package layout documented in `docs/architecture.md` as a starting point. Include `domain/` or `data/` only when the feature has enough logic or an external data boundary to warrant them; keep small features simple.
 - In shared code, prefer package names that reflect the domain and capability. Avoid generic packages such as `utils`, `common`, or `misc` unless the code is legitimately cross-cutting.
 - In platform-specific code, keep adapter and integration code near the platform boundary, not spread across unrelated screens.
 - Keep each feature cohesive: place models, state, use cases, and UI relevant to the same feature in the same feature area when possible.
