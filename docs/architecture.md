@@ -1,43 +1,27 @@
 # Architecture overview
 
-This project targets Android and iOS with Kotlin Multiplatform and shares its application UI using Compose Multiplatform. This is the recommended architecture for new work; the checked-in Gradle configuration and source sets remain authoritative if they differ from the example below.
+This project targets Android and iOS with Kotlin Multiplatform and shares its application UI using Compose Multiplatform. The generated project currently uses the `shared`, `androidApp`, and `iosApp` modules. Keep this guide aligned with the checked-in Gradle configuration and source sets.
 
-## Default shape
+## Current project layout
 
-Start with the existing shared Compose application module (often named `composeApp`) and organize its common code by feature. Keep the app entry points thin: Android and iOS host the same shared root composable, while native lifecycle and device integrations remain at their platform boundaries. Avoid splitting code into more Gradle modules until a real build, ownership, reuse, or dependency-isolation need appears.
+The current starter is organized as follows. The feature packages shown under `commonMain` are recommendations for new code; they do not all exist yet.
 
 ```text
-composeApp/
-	src/
-		commonMain/kotlin/<package>/
-			app/
-				App.kt
-				navigation/
-			core/
-				platform/                 # Small cross-cutting platform contracts only
-				ui/                       # Shared design system and reusable components
-			feature/
-				play/
-					domain/                 # Feature rules and models, when warranted
-					data/                   # Implementations and mappings, when warranted
-					presentation/           # State, actions, state holder, route
-					ui/                     # Stateless Compose screen/components
-				settings/
-					presentation/
-					ui/
-		commonTest/kotlin/<package>/
-			feature/...
-		androidMain/kotlin/<package>/
-			platform/                   # Android adapters and actual declarations
-		iosMain/kotlin/<package>/
-			platform/                   # iOS adapters and actual declarations
-		androidUnitTest/kotlin/<package>/
-		iosTest/kotlin/<package>/
-iosApp/                           # Native iOS host, if the project has one
-	...
+shared/
+    src/
+        commonMain/kotlin/com/saishaddai/
+            App.kt                # Shared Compose root
+            feature/<name>/        # Add feature code here as it is introduced
+        commonTest/kotlin/com/saishaddai/
+        androidMain/kotlin/com/saishaddai/
+        iosMain/kotlin/com/saishaddai/
+androidApp/
+    src/main/kotlin/com/saishaddai/MainActivity.kt
+iosApp/
+    iosApp/                        # SwiftUI host for the shared Compose UI
 ```
 
-This is a package/source-set guide, not a mandate to create empty directories. Use the repository's actual module names and target hierarchy. A template may place Android entry code in `composeApp/src/androidMain` and the SwiftUI host in a separate `iosApp`; follow the existing setup.
+Organize shared code by feature as the app grows. Keep the app entry points thin: Android and iOS host the same shared root composable, while native lifecycle and device integrations remain at their platform boundaries. Do not create empty directories or split code into additional Gradle modules without a real build, ownership, reuse, or dependency-isolation need.
 
 ## Ownership and dependencies
 
