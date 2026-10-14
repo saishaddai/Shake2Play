@@ -9,10 +9,12 @@ This file helps humans and agents find the intended ownership of code and config
 - `ai-tools/`: vendor-neutral capability profiles describing which tool actions are appropriate for task types.
 - `mcp/`: documentation for Model Context Protocol integrations when the project uses them.
 - `scripts/`: local automation and validation helpers.
-- Shared Compose KMP app module (often `composeApp`): shared app shell, navigation, feature presentation, Compose UI, and common business/data code.
-- `androidMain` / Android app host: Android entry point, lifecycle, permissions, and Android-specific adapters.
-- `iosMain` / iOS app host (often `iosApp`): iOS adapters and the native host that launches the shared Compose UI.
-- `commonTest` and platform test source sets: shared behavior tests and platform integration tests, respectively.
+- `shared/`: Kotlin Multiplatform library containing the shared Compose UI and platform source sets. Its configured source sets include `commonMain`, `commonTest`, `androidMain`, and `iosMain`.
+- `androidApp/`: Android application host; its `MainActivity` launches the shared Compose root.
+- `iosApp/`: SwiftUI application host; it embeds the shared Compose view controller.
+- `gradle/`: Gradle wrapper configuration and version catalog.
+- `shared/src/commonMain/kotlin/com/saishaddai/feature/<name>/`: recommended location for new feature code; create feature packages as needed rather than pre-populating empty folders.
+- `shared/src/commonTest/` and platform test source sets: shared behavior tests and platform integration tests, respectively.
 - `core/` inside shared code: only genuinely cross-cutting contracts or UI primitives; feature code belongs under `feature/<name>/`.
 
 See [architecture.md](architecture.md) for the recommended source tree, dependency direction, and ownership rules.
