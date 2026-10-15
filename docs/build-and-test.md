@@ -23,7 +23,7 @@ Run commands from the repository root using the checked-in wrapper:
 | Command | Purpose | Current status |
 | --- | --- | --- |
 | `./gradlew :shared:compileCommonMainKotlinMetadata` | Compile shared common Kotlin metadata | Passed on 2026-10-12 |
-| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-14 |
+| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-15 after the shared screen update |
 | `./gradlew :shared:allTests` | Run configured shared and platform tests | Not verified: task graph requires the Android SDK; the run stopped before tests executed |
 
 Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK is configured locally through `sdk.dir` in the ignored `local.properties`; do not commit machine-specific SDK paths.

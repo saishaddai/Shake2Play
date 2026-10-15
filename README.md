@@ -43,6 +43,31 @@ Shared UI and platform-independent logic belong in `shared/src/commonMain`. Andr
 
 For current test commands and host limitations, see [docs/build-and-test.md](docs/build-and-test.md).
 
+### Run from a terminal
+
+The following example is for macOS or Linux. Adjust `ANDROID_HOME` if your SDK is installed elsewhere:
+
+```bash
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+
+# In one terminal, list the available emulators and start one.
+emulator -list-avds
+emulator -avd <AVD_NAME>
+```
+
+With the emulator running (or an Android device connected with USB debugging enabled), open a second terminal at the repository root and run:
+
+```bash
+adb devices
+./gradlew :androidApp:installDebug
+adb shell am start -n com.saishaddai/.MainActivity
+```
+
+`adb devices` should list the target device before installing. The app opens on the shared Shake2Play home screen; motion-triggered playback is not implemented yet.
+
+If installation fails with `Requested internal only, but not enough space`, free internal storage on the device or emulator and retry `./gradlew :androidApp:installDebug`.
+
 ## 📸 Screenshots
 (Coming soon: UI previews and demo of shake-to-play interaction)
 
