@@ -22,9 +22,9 @@ Assumption: Android is the first runtime target. The local Android SDK path must
 
 ## 3. Create the minimal shared app shell
 
-- [ ] Replace the starter demo content with a simple Shake2Play home screen in `shared/src/commonMain`.
-- [ ] Keep the shared `App()` entry point and avoid adding sensor or audio integrations in this step.
-- [ ] Build and launch the app on Android.
+- [x] Replace the starter demo content with a simple Shake2Play home screen in `shared/src/commonMain`.
+- [x] Keep the shared `App()` entry point and avoid adding sensor or audio integrations in this step.
+- [x] Build and launch the app on Android.
 
 **Done when:** the new shared screen renders successfully on Android.
 
