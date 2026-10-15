@@ -23,15 +23,15 @@ Run commands from the repository root using the checked-in wrapper:
 | Command | Purpose | Current status |
 | --- | --- | --- |
 | `./gradlew :shared:compileCommonMainKotlinMetadata` | Compile shared common Kotlin metadata | Passed on 2026-10-12 |
-| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Not verified: Android SDK path is empty in local `local.properties` |
+| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-14 |
 | `./gradlew :shared:allTests` | Run configured shared and platform tests | Not verified: task graph requires the Android SDK; the run stopped before tests executed |
 
-Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK can be configured with `ANDROID_HOME` or a local `sdk.dir` entry in the ignored `local.properties`; do not commit machine-specific SDK paths.
+Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK is configured locally through `sdk.dir` in the ignored `local.properties`; do not commit machine-specific SDK paths.
 
 ## Current host limitations
 
 - The shared module configures `iosArm64` and `iosSimulatorArm64`. On the current `macos-x86_64` host, Gradle disables `iosSimulatorArm64Test` because its architecture does not match the host.
-- The Android build and tests currently stop because no Android SDK location is configured. This is an environment setup issue; it does not establish whether those tasks pass once the SDK is available.
+- The Android debug build succeeds with the configured SDK. The shared/platform test task has not been rerun since SDK setup, so its status remains unverified.
 - A successful common metadata compilation does not verify Android packaging, iOS framework linking, or app launch behavior.
 
 ## Good practices

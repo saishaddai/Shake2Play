@@ -14,9 +14,9 @@ Assumption: Android is the first runtime target. The local Android SDK path must
 
 ## 2. Run the untouched starter on Android
 
-- [ ] Configure the Android SDK path locally without committing machine-specific configuration.
-- [ ] Build the Android debug app.
-- [ ] Launch it on an Android emulator or device.
+- [x] Configure the Android SDK path locally without committing machine-specific configuration.
+- [x] Build the Android debug app.
+- [x] Launch it on an Android emulator or device.
 
 **Done when:** the starter app opens successfully on Android.
 
