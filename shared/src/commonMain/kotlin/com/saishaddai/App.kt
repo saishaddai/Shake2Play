@@ -14,10 +14,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.saishaddai.feature.soundboard.SoundboardState
 
 @Composable
 @Preview
 fun App() {
+    val soundboardState = SoundboardState()
+
     MaterialTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
@@ -48,24 +51,35 @@ fun App() {
                     )
                 }
 
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant,
-                ) {
-                    Column(
-                        modifier = Modifier.padding(20.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                if (soundboardState.isEmpty) {
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(8.dp),
+                        color = MaterialTheme.colorScheme.surfaceVariant,
                     ) {
-                        Text(
-                            text = "No sounds yet",
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        Text(
-                            text = "Your sound library will appear here.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = "No sounds yet",
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                            Text(
+                                text = "Your sound library will appear here.",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
+                    }
+                } else {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        soundboardState.sounds.forEach { sound ->
+                            Text(
+                                text = sound.title,
+                                style = MaterialTheme.typography.titleMedium,
+                            )
+                        }
                     }
                 }
             }

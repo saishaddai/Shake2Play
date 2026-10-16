@@ -30,9 +30,9 @@ Assumption: Android is the first runtime target. The local Android SDK path must
 
 ## 4. Add the first meaningful shared test
 
-- [ ] Add a common test for real state or behavior introduced by the app.
-- [ ] Avoid placeholder tests that only exercise trivial arithmetic.
-- [ ] Run the relevant shared test task and record the result.
+- [x] Add a common test for real state or behavior introduced by the app.
+- [x] Avoid placeholder tests that only exercise trivial arithmetic.
+- [x] Run the relevant shared test task and record the result.
 
 **Done when:** the new test passes using the configured test task.
 

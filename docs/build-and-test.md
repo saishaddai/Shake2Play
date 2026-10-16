@@ -23,15 +23,16 @@ Run commands from the repository root using the checked-in wrapper:
 | Command | Purpose | Current status |
 | --- | --- | --- |
 | `./gradlew :shared:compileCommonMainKotlinMetadata` | Compile shared common Kotlin metadata | Passed on 2026-10-12 |
-| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-15 after the shared screen update |
-| `./gradlew :shared:allTests` | Run configured shared and platform tests | Not verified: task graph requires the Android SDK; the run stopped before tests executed |
+| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-16 after soundboard state integration |
+| `./gradlew :shared:testAndroidHostTest` | Run common tests and Android host tests on the host JVM | Passed on 2026-10-16; the two soundboard state tests passed |
+| `./gradlew :shared:allTests` | Run configured shared tests across targets | Not completed on this Intel Mac; the aggregate includes iOS simulator work unavailable on this host |
 
 Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK is configured locally through `sdk.dir` in the ignored `local.properties`; do not commit machine-specific SDK paths.
 
 ## Current host limitations
 
 - The shared module configures `iosArm64` and `iosSimulatorArm64`. On the current `macos-x86_64` host, Gradle disables `iosSimulatorArm64Test` because its architecture does not match the host.
-- The Android debug build succeeds with the configured SDK. The shared/platform test task has not been rerun since SDK setup, so its status remains unverified.
+- The Android debug build and `:shared:testAndroidHostTest` pass with the configured SDK. iOS simulator test execution remains unavailable on this Intel host.
 - A successful common metadata compilation does not verify Android packaging, iOS framework linking, or app launch behavior.
 
 ## Good practices

@@ -9,7 +9,7 @@
 ## 📱 About the Project
 - **Configured:** Android and iOS Kotlin Multiplatform targets with a shared Compose UI.
 - **Planned:** motion-triggered sound playback and the platform integrations it requires.
-- **Configured:** a `commonTest` source set using `kotlin.test`; meaningful application tests are still to be added.
+- **Tested:** shared soundboard empty and populated state using `kotlin.test` in `commonTest`.
 
 ---
 
