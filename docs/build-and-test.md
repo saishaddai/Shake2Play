@@ -23,11 +23,27 @@ Run commands from the repository root using the checked-in wrapper:
 | Command | Purpose | Current status |
 | --- | --- | --- |
 | `./gradlew :shared:compileCommonMainKotlinMetadata` | Compile shared common Kotlin metadata | Passed on 2026-10-12 |
-| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-16 after soundboard state integration |
-| `./gradlew :shared:testAndroidHostTest` | Run common tests and Android host tests on the host JVM | Passed on 2026-10-16; the two soundboard state tests passed |
+| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-20 |
+| `./gradlew :shared:testAndroidHostTest` | Run common tests and Android host tests on the host JVM | Passed on 2026-10-20; the two soundboard state tests passed |
 | `./gradlew :shared:allTests` | Run configured shared tests across targets | Not completed on this Intel Mac; the aggregate includes iOS simulator work unavailable on this host |
 
 Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK is configured locally through `sdk.dir` in the ignored `local.properties`; do not commit machine-specific SDK paths.
+
+## Run the Android app
+
+Start an Android emulator or connect a device with USB debugging enabled, then run these commands from the repository root with the SDK's `platform-tools` directory on `PATH`:
+
+```bash
+adb devices
+./gradlew :androidApp:installDebug
+adb shell am start -n com.saishaddai/.MainActivity
+```
+
+The app was launched successfully on Android in checklist step 2. No device was attached during the 2026-10-20 verification, so the launch was not repeated alongside the build and test checks.
+
+## Deferred feature boundary
+
+Motion detection and sound playback are the next feature slice; neither is implemented in the current baseline. Keep shared trigger rules and soundboard behavior in `commonMain`, behind small injected capability contracts where shared code needs device behavior. Implement sensor access, permissions, lifecycle handling, audio routing, and resource cleanup in `androidMain` and `iosMain` (with host integration in `androidApp` or `iosApp` where needed). Keep hardware-dependent checks in platform tests when practical; shared behavior should remain testable in `commonTest` with deterministic fakes.
 
 ## Current host limitations
 

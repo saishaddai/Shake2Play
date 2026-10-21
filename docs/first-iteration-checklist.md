@@ -38,8 +38,8 @@ Assumption: Android is the first runtime target. The local Android SDK path must
 
 ## 5. Record the verified baseline
 
-- [ ] Document the commands that were verified for building, running, and testing.
-- [ ] Note any platform-specific validation limitations.
-- [ ] Record motion detection and sound playback as the next feature slice, including their platform boundaries.
+- [x] Document the commands that were verified for building, running, and testing.
+- [x] Note any platform-specific validation limitations.
+- [x] Record motion detection and sound playback as the next feature slice, including their platform boundaries.
 
 **Done when:** another contributor can follow the documented steps to reproduce the verified baseline and see what is intentionally deferred.
