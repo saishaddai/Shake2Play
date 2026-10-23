@@ -15,10 +15,10 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 ## 2. Add shared soundboard and trigger behavior
 
-- [ ] Extend the shared sound model with only the metadata needed to identify and present the chosen sounds.
-- [ ] Put shared selection and trigger rules in the soundboard feature under `commonMain`.
+- [x] Extend the shared sound model with only the metadata needed to identify and present the chosen sounds.
+- [x] Put shared selection and trigger rules in the soundboard feature under `commonMain`.
 - [ ] Define narrow injected contracts for motion events and sound playback only where shared behavior needs them; keep platform APIs out of `commonMain`.
-- [ ] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, and unavailable capabilities using fakes.
+- [x] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, and unavailable capabilities using fakes.
 
 **Done when:** shared behavior is testable without sensors, audio hardware, or wall-clock delays.
 
