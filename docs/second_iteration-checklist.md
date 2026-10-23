@@ -6,11 +6,12 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 ## 1. Decide the first playable behavior
 
-- [ ] Choose whether the first sound library uses bundled sample clips or user-provided audio. Recommended for this iteration: bundled clips; defer import and persistence.
+- [x] Bundle the initial sample clips inside the app and play them from local resources only; do not download sounds or require network access. Defer user-provided audio and persistence.
+- [ ] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, and verify playback on the supported Android and iOS versions before treating that encoding as a cross-platform requirement.
 - [ ] Define what a shake does (play the selected sound or advance through the list) and how a user can preview/select sounds without shaking.
 - [ ] Identify the visible states for listening, playback, no available sensor, and playback failure.
 
-**Done when:** sound source, shake behavior, and required UI states are agreed before platform APIs or UI are implemented.
+**Done when:** local-only bundled playback is agreed, and shake behavior and required UI states are defined before platform APIs or UI are implemented.
 
 ## 2. Add shared soundboard and trigger behavior
 
@@ -24,7 +25,7 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 ## 3. Implement the Android capability adapters
 
 - [ ] Implement motion detection in `androidMain`, including lifecycle-aware registration and sensible handling when a sensor is unavailable.
-- [ ] Implement playback in `androidMain` using the agreed local sound assets, with cleanup tied to the owning lifecycle.
+- [ ] Implement playback in `androidMain` using app-bundled local sound assets only, with cleanup tied to the owning lifecycle and no runtime network fetch.
 - [ ] Wire required dependencies and any platform permission or lifecycle handling through `androidApp` without moving Android APIs into shared code.
 - [ ] Add focused platform tests where practical; keep hardware checks out of ordinary unit tests.
 
