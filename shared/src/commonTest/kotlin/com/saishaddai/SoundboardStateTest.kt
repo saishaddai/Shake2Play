@@ -1,5 +1,6 @@
 package com.saishaddai
 
+import com.saishaddai.feature.soundboard.PlaybackState
 import com.saishaddai.feature.soundboard.SoundItem
 import com.saishaddai.feature.soundboard.SoundboardState
 import kotlin.test.Test
@@ -46,16 +47,52 @@ class SoundboardStateTest {
     }
 
     @Test
-    fun shakingMovesSelectionToTheNextSoundAndWrapsAround() {
+    fun selectedSoundStaysTheSameUntilPlaybackFinishes() {
         val bell = SoundItem(id = "bell", title = "Bell")
         val chime = SoundItem(id = "chime", title = "Chime")
-        val cymbal = SoundItem(id = "cymbal", title = "Cymbal")
-        val state = SoundboardState(sounds = listOf(bell, chime, cymbal), selectedSoundId = bell.id)
+        val state = SoundboardState(sounds = listOf(bell, chime), selectedSoundId = bell.id)
 
-        val next = state.handleShake()
-        val wrapped = next.handleShake()
+        val playing = state.handleShake()
+        val ignored = playing.handleShake()
 
-        assertEquals(chime, next.selectedSound)
-        assertEquals(cymbal, wrapped.selectedSound)
+        assertEquals(bell, playing.selectedSound)
+        assertEquals(PlaybackState.PLAYING, playing.playbackState)
+        assertEquals(bell, ignored.selectedSound)
+        assertEquals(PlaybackState.PLAYING, ignored.playbackState)
+    }
+
+    @Test
+    fun selectedSoundStartsPlaybackOnceWhenReady() {
+        val bell = SoundItem(id = "bell", title = "Bell")
+        val state = SoundboardState(sounds = listOf(bell), selectedSoundId = bell.id)
+
+        val playing = state.handleShake()
+
+        assertEquals(PlaybackState.PLAYING, playing.playbackState)
+        assertEquals(bell, playing.selectedSound)
+    }
+
+    @Test
+    fun additionalShakesAreIgnoredWhileSoundIsPlaying() {
+        val bell = SoundItem(id = "bell", title = "Bell")
+        val state = SoundboardState(sounds = listOf(bell), selectedSoundId = bell.id)
+
+        val playing = state.handleShake()
+        val ignored = playing.handleShake()
+
+        assertEquals(PlaybackState.PLAYING, ignored.playbackState)
+        assertEquals(bell, ignored.selectedSound)
+    }
+
+    @Test
+    fun playbackFinishedResetsTheFlowForTheNextShake() {
+        val bell = SoundItem(id = "bell", title = "Bell")
+        val state = SoundboardState(sounds = listOf(bell), selectedSoundId = bell.id)
+
+        val playing = state.handleShake()
+        val ready = playing.onPlaybackFinished()
+
+        assertEquals(PlaybackState.READY, ready.playbackState)
+        assertEquals(bell, ready.selectedSound)
     }
 }

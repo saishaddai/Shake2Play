@@ -8,8 +8,8 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 - [x] Bundle the initial sample clips inside the app and play them from local resources only; do not download sounds or require network access. Defer user-provided audio and persistence.
 - [ ] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, and verify playback on the supported Android and iOS versions before treating that encoding as a cross-platform requirement.
-- [ ] Define what a shake does (play the selected sound or advance through the list) and how a user can preview/select sounds without shaking.
-- [ ] Identify the visible states for listening, playback, no available sensor, and playback failure.
+- [x] Define what a shake does: on the selected sound screen, one shake triggers one playback for that sound while playback is active, and the same shake is ignored until playback finishes.
+- [x] Identify the visible states for listening, playback, no available sensor, and playback failure in the shared soundboard state: `READY`, `PLAYING`, and the unavailable or error states remain platform-aware follow-up states.
 
 **Done when:** local-only bundled playback is agreed, and shake behavior and required UI states are defined before platform APIs or UI are implemented.
 

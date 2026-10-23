@@ -5,9 +5,15 @@ data class SoundItem(
     val title: String,
 )
 
+enum class PlaybackState {
+    READY,
+    PLAYING,
+}
+
 data class SoundboardState(
     val sounds: List<SoundItem> = emptyList(),
     val selectedSoundId: String? = null,
+    val playbackState: PlaybackState = PlaybackState.READY,
 ) {
     val isEmpty: Boolean
         get() = sounds.isEmpty()
@@ -17,24 +23,30 @@ data class SoundboardState(
             sounds.firstOrNull { it.id == id }
         }
 
+    val canShake: Boolean
+        get() = selectedSoundId != null && !isEmpty && playbackState == PlaybackState.READY
+
     fun selectSound(soundId: String): SoundboardState {
         return if (sounds.any { it.id == soundId }) {
-            copy(selectedSoundId = soundId)
+            copy(selectedSoundId = soundId, playbackState = PlaybackState.READY)
         } else {
             this
         }
     }
 
     fun handleShake(): SoundboardState {
-        if (sounds.isEmpty()) {
+        if (!canShake) {
             return this
         }
 
-        val currentIndex = selectedSoundId?.let { soundId ->
-            sounds.indexOfFirst { it.id == soundId }
-        }?.takeIf { it >= 0 } ?: 0
+        return copy(playbackState = PlaybackState.PLAYING)
+    }
 
-        val nextIndex = if (currentIndex == sounds.lastIndex) 0 else currentIndex + 1
-        return copy(selectedSoundId = sounds[nextIndex].id)
+    fun onPlaybackFinished(): SoundboardState {
+        return if (selectedSoundId == null) {
+            this
+        } else {
+            copy(playbackState = PlaybackState.READY)
+        }
     }
 }
