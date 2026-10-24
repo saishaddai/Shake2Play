@@ -7,18 +7,18 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 ## 1. Decide the first playable behavior
 
 - [x] Bundle the initial sample clips inside the app and play them from local resources only; do not download sounds or require network access. Defer user-provided audio and persistence.
-- [ ] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, and verify playback on the supported Android and iOS versions before treating that encoding as a cross-platform requirement.
-- [ ] Define what a shake does (play the selected sound or advance through the list) and how a user can preview/select sounds without shaking.
-- [ ] Identify the visible states for listening, playback, no available sensor, and playback failure.
+- [x] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, stored in `androidApp/src/main/res/raw` so Android can reference them through the generated `R.raw` resources. Verify playback on the supported Android and iOS versions before treating that encoding as a cross-platform requirement.
+- [x] Define what a shake does: on the selected sound screen, one shake triggers one playback for that sound while playback is active, and the same shake is ignored until playback finishes.
+- [x] Identify the visible states for listening, playback, no available sensor, and playback failure in the shared soundboard state: `READY`, `PLAYING`, and the unavailable or error states remain platform-aware follow-up states.
 
 **Done when:** local-only bundled playback is agreed, and shake behavior and required UI states are defined before platform APIs or UI are implemented.
 
 ## 2. Add shared soundboard and trigger behavior
 
-- [ ] Extend the shared sound model with only the metadata needed to identify and present the chosen sounds.
-- [ ] Put shared selection and trigger rules in the soundboard feature under `commonMain`.
+- [x] Extend the shared sound model with only the metadata needed to identify and present the chosen sounds.
+- [x] Put shared selection and trigger rules in the soundboard feature under `commonMain`.
 - [ ] Define narrow injected contracts for motion events and sound playback only where shared behavior needs them; keep platform APIs out of `commonMain`.
-- [ ] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, and unavailable capabilities using fakes.
+- [x] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, and unavailable capabilities using fakes.
 
 **Done when:** shared behavior is testable without sensors, audio hardware, or wall-clock delays.
 
