@@ -8,12 +8,14 @@ data class SoundItem(
 enum class PlaybackState {
     READY,
     PLAYING,
+    FAILED,
 }
 
 data class SoundboardState(
     val sounds: List<SoundItem> = emptyList(),
     val selectedSoundId: String? = null,
     val playbackState: PlaybackState = PlaybackState.READY,
+    val shakeAvailability: ShakeAvailability = ShakeAvailability.UNKNOWN,
 ) {
     val isEmpty: Boolean
         get() = sounds.isEmpty()
@@ -24,7 +26,12 @@ data class SoundboardState(
         }
 
     val canShake: Boolean
-        get() = selectedSoundId != null && !isEmpty && playbackState == PlaybackState.READY
+        get() = selectedSoundId != null && !isEmpty &&
+            shakeAvailability == ShakeAvailability.AVAILABLE && playbackState != PlaybackState.PLAYING
+
+    val canPlayManually: Boolean
+        get() = selectedSoundId != null && !isEmpty &&
+            shakeAvailability == ShakeAvailability.UNAVAILABLE && playbackState != PlaybackState.PLAYING
 
     fun selectSound(soundId: String): SoundboardState {
         return if (sounds.any { it.id == soundId }) {
@@ -42,11 +49,27 @@ data class SoundboardState(
         return copy(playbackState = PlaybackState.PLAYING)
     }
 
+    fun handleManualPlay(): SoundboardState {
+        if (!canPlayManually) {
+            return this
+        }
+
+        return copy(playbackState = PlaybackState.PLAYING)
+    }
+
     fun onPlaybackFinished(): SoundboardState {
         return if (selectedSoundId == null) {
             this
         } else {
             copy(playbackState = PlaybackState.READY)
+        }
+    }
+
+    fun onPlaybackFailed(): SoundboardState {
+        return if (selectedSoundId == null) {
+            this
+        } else {
+            copy(playbackState = PlaybackState.FAILED)
         }
     }
 }

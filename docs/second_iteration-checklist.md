@@ -17,8 +17,8 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 - [x] Extend the shared sound model with only the metadata needed to identify and present the chosen sounds.
 - [x] Put shared selection and trigger rules in the soundboard feature under `commonMain`.
-- [ ] Define narrow injected contracts for motion events and sound playback only where shared behavior needs them; keep platform APIs out of `commonMain`.
-- [x] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, and unavailable capabilities using fakes.
+- [x] Define narrow injected `ShakeDetector` and `SoundPlayer` contracts in `commonMain`; keep platform APIs out of shared code.
+- [x] Add deterministic `commonTest` coverage for selection, trigger behavior, empty soundboards, shake availability, and manual-play fallback. Adapter orchestration tests with fakes belong with platform integration.
 
 **Done when:** shared behavior is testable without sensors, audio hardware, or wall-clock delays.
 
