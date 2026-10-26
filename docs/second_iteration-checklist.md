@@ -2,12 +2,12 @@
 
 Goal: turn the shared soundboard shell into a first playable shake-to-sound experience while keeping platform behavior behind the existing KMP source-set boundaries.
 
-Assumption: Android is the first runnable target, as in the first iteration. The current baseline has an empty shared `SoundboardState`, no sound assets, and no sensor or audio adapters. This iteration targets a small Android vertical slice; iOS runtime support and user-managed sound libraries are follow-up work unless the product scope changes.
+Assumption: Android is the first runnable target, as in the first iteration. The initial baseline had an empty shared `SoundboardState`, no sound assets, and no sensor or audio adapters. This iteration targets a small Android vertical slice; iOS runtime support and user-managed sound libraries are follow-up work unless the product scope changes.
 
 ## 1. Decide the first playable behavior
 
 - [x] Bundle the initial sample clips inside the app and play them from local resources only; do not download sounds or require network access. Defer user-provided audio and persistence.
-- [x] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, stored in `androidApp/src/main/res/raw` so Android can reference them through the generated `R.raw` resources. Verify playback on the supported Android and iOS versions before treating that encoding as a cross-platform requirement.
+- [x] Use audio-only `.m4a` files encoded as AAC-LC for the initial clips, stored in `shared/src/commonMain/composeResources/files/sounds` so Android and iOS adapters can load the same bundled assets through Compose Multiplatform resources. Verify playback on supported Android and iOS versions before treating that encoding as a cross-platform requirement.
 - [x] Define what a shake does: on the selected sound screen, one shake triggers one playback for that sound while playback is active, and the same shake is ignored until playback finishes.
 - [x] Identify the visible states for listening, playback, no available sensor, and playback failure in the shared soundboard state: `READY`, `PLAYING`, and the unavailable or error states remain platform-aware follow-up states.
 
@@ -24,10 +24,10 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 ## 3. Implement the Android capability adapters
 
-- [ ] Implement motion detection in `androidMain`, including lifecycle-aware registration and sensible handling when a sensor is unavailable.
-- [ ] Implement playback in `androidMain` using app-bundled local sound assets only, with cleanup tied to the owning lifecycle and no runtime network fetch.
-- [ ] Wire required dependencies and any platform permission or lifecycle handling through `androidApp` without moving Android APIs into shared code.
-- [ ] Add focused platform tests where practical; keep hardware checks out of ordinary unit tests.
+- [x] Implement motion detection in `androidMain`, including lifecycle-aware accelerometer registration, shake filtering, and handling when a sensor is unavailable.
+- [x] Implement playback in `androidMain` using the shared bundled sound resources only, with playback and data-source cleanup tied to the activity lifecycle and no runtime network fetch.
+- [x] Wire lifecycle-bound adapters through `androidApp`; sensor listening starts only when requested and needs no additional platform permission.
+- [x] Add common-test coverage for sound ID-to-resource mapping; keep hardware checks out of ordinary unit tests.
 
 **Done when:** Android can provide motion events and play a selected sound through the shared contracts, with resources released when listening or playback ends.
 

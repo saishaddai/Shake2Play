@@ -1,20 +1,29 @@
 package com.saishaddai
 
-import android.media.MediaPlayer
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.lifecycleScope
+import com.saishaddai.feature.soundboard.AndroidShakeDetector
+import com.saishaddai.feature.soundboard.AndroidSoundPlayer
+import com.saishaddai.feature.soundboard.PlaybackResult
+import com.saishaddai.feature.soundboard.ShakeAvailability
 import com.saishaddai.feature.soundboard.SoundItem
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private var activePlayer: MediaPlayer? = null
+    private lateinit var soundPlayer: AndroidSoundPlayer
+    private lateinit var shakeDetector: AndroidShakeDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
+        soundPlayer = AndroidSoundPlayer(this)
+        shakeDetector = AndroidShakeDetector(this, this)
 
         setContent {
             App(
@@ -25,40 +34,32 @@ class MainActivity : ComponentActivity() {
                     SoundItem("oneechan", "Oneechan"),
                     SoundItem("tuturu", "Tuturu"),
                 ),
-                onPlaySound = { sound -> playSound(sound.id) },
+                onPlaySound = { sound ->
+                    lifecycleScope.launch {
+                        when (val result = soundPlayer.play(sound.id)) {
+                            PlaybackResult.Completed -> Unit
+                            is PlaybackResult.Failed -> {
+                                Log.e(TAG, "Unable to play sound: ${result.reason}")
+                            }
+                        }
+                    }
+                },
             )
         }
     }
 
-    private fun playSound(soundId: String) {
-        val resourceId = when (soundId) {
-            "ahh" -> R.raw.ahh
-            "explosion" -> R.raw.explosion
-            "nyan" -> R.raw.nyan
-            "oneechan" -> R.raw.oneechan
-            "tuturu" -> R.raw.tuturu
-            else -> return
-        }
+    internal fun startShakeDetection(onShake: () -> Unit): ShakeAvailability =
+        shakeDetector.start(onShake)
 
-        if (activePlayer?.isPlaying == true) {
-            return
-        }
-
-        activePlayer?.release()
-        activePlayer = MediaPlayer.create(this, resourceId)
-        activePlayer?.setOnCompletionListener { player ->
-            player.release()
-            if (activePlayer === player) {
-                activePlayer = null
-            }
-        }
-        activePlayer?.start()
-    }
+    internal fun stopShakeDetection() = shakeDetector.stop()
 
     override fun onDestroy() {
-        activePlayer?.release()
-        activePlayer = null
+        stopShakeDetection()
         super.onDestroy()
+    }
+
+    private companion object {
+        const val TAG = "Shake2Play"
     }
 }
 
