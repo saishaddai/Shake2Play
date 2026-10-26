@@ -2,7 +2,7 @@
 
 Goal: turn the shared soundboard shell into a first playable shake-to-sound experience while keeping platform behavior behind the existing KMP source-set boundaries.
 
-Assumption: Android is the first runnable target, as in the first iteration. The current baseline has an empty shared `SoundboardState`, no sound assets, and no sensor or audio adapters. This iteration targets a small Android vertical slice; iOS runtime support and user-managed sound libraries are follow-up work unless the product scope changes.
+Assumption: Android is the first runnable target, as in the first iteration. The initial baseline had an empty shared `SoundboardState`, no sound assets, and no sensor or audio adapters. This iteration targets a small Android vertical slice; iOS runtime support and user-managed sound libraries are follow-up work unless the product scope changes.
 
 ## 1. Decide the first playable behavior
 
@@ -24,10 +24,10 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 ## 3. Implement the Android capability adapters
 
-- [ ] Implement motion detection in `androidMain`, including lifecycle-aware registration and sensible handling when a sensor is unavailable.
-- [ ] Implement playback in `androidMain` using app-bundled local sound assets only, with cleanup tied to the owning lifecycle and no runtime network fetch.
-- [ ] Wire required dependencies and any platform permission or lifecycle handling through `androidApp` without moving Android APIs into shared code.
-- [ ] Add focused platform tests where practical; keep hardware checks out of ordinary unit tests.
+- [x] Implement motion detection in `androidMain`, including lifecycle-aware accelerometer registration, shake filtering, and handling when a sensor is unavailable.
+- [x] Implement playback in `androidMain` using the shared bundled sound resources only, with playback and data-source cleanup tied to the activity lifecycle and no runtime network fetch.
+- [x] Wire lifecycle-bound adapters through `androidApp`; sensor listening starts only when requested and needs no additional platform permission.
+- [x] Add common-test coverage for sound ID-to-resource mapping; keep hardware checks out of ordinary unit tests.
 
 **Done when:** Android can provide motion events and play a selected sound through the shared contracts, with resources released when listening or playback ends.
 

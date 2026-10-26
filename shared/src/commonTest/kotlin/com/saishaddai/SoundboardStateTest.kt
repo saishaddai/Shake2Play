@@ -4,6 +4,7 @@ import com.saishaddai.feature.soundboard.PlaybackState
 import com.saishaddai.feature.soundboard.ShakeAvailability
 import com.saishaddai.feature.soundboard.SoundItem
 import com.saishaddai.feature.soundboard.SoundboardState
+import com.saishaddai.feature.soundboard.soundResourcePath
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -23,6 +24,16 @@ class SoundboardStateTest {
 
         assertFalse(state.isEmpty)
         assertEquals(listOf(sound), state.sounds)
+    }
+
+    @Test
+    fun bundledSoundIdsResolveToSharedResourcePaths() {
+        assertEquals("files/sounds/ahh.m4a", soundResourcePath("ahh"))
+        assertEquals("files/sounds/explosion.m4a", soundResourcePath("explosion"))
+        assertEquals("files/sounds/nyan.m4a", soundResourcePath("nyan"))
+        assertEquals("files/sounds/oneechan.m4a", soundResourcePath("oneechan"))
+        assertEquals("files/sounds/tuturu.m4a", soundResourcePath("tuturu"))
+        assertEquals(null, soundResourcePath("missing"))
     }
 
     @Test
