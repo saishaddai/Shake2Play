@@ -1,6 +1,7 @@
 package com.saishaddai
 
 import com.saishaddai.feature.soundboard.PlaybackState
+import com.saishaddai.feature.soundboard.PlaybackFailure
 import com.saishaddai.feature.soundboard.ShakeAvailability
 import com.saishaddai.feature.soundboard.SoundItem
 import com.saishaddai.feature.soundboard.SoundboardState
@@ -66,6 +67,7 @@ class SoundboardStateTest {
             sounds = listOf(bell, chime),
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
         )
 
         val playing = state.handleShake()
@@ -84,6 +86,7 @@ class SoundboardStateTest {
             sounds = listOf(bell),
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
         )
 
         val playing = state.handleShake()
@@ -99,6 +102,7 @@ class SoundboardStateTest {
             sounds = listOf(bell),
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
         )
 
         val playing = state.handleShake()
@@ -115,6 +119,7 @@ class SoundboardStateTest {
             sounds = listOf(bell),
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
         )
 
         val playing = state.handleShake()
@@ -141,7 +146,10 @@ class SoundboardStateTest {
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.UNAVAILABLE,
         )
-        val available = unavailable.copy(shakeAvailability = ShakeAvailability.AVAILABLE)
+        val available = unavailable.copy(
+            shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
+        )
 
         assertTrue(unavailable.canPlayManually)
         assertFalse(available.canPlayManually)
@@ -171,13 +179,38 @@ class SoundboardStateTest {
             sounds = listOf(bell),
             selectedSoundId = bell.id,
             shakeAvailability = ShakeAvailability.AVAILABLE,
+            isListening = true,
         )
 
-        val failed = state.handleShake().onPlaybackFailed()
+        val failed = state.handleShake().onPlaybackFailed(PlaybackFailure.DECODER_ERROR)
         val retry = failed.handleShake()
 
         assertEquals(PlaybackState.FAILED, failed.playbackState)
+        assertEquals(PlaybackFailure.DECODER_ERROR, failed.playbackFailure)
         assertEquals(PlaybackState.PLAYING, retry.playbackState)
+    }
+
+    @Test
+    fun shakeDoesNotStartUntilListeningIsEnabled() {
+        val bell = SoundItem(id = "bell", title = "Bell")
+        val state = SoundboardState(
+            sounds = listOf(bell),
+            selectedSoundId = bell.id,
+            shakeAvailability = ShakeAvailability.AVAILABLE,
+        )
+
+        assertEquals(state, state.handleShake())
+    }
+
+    @Test
+    fun previewCanStartRegardlessOfShakeAvailability() {
+        val bell = SoundItem(id = "bell", title = "Bell")
+        val state = SoundboardState(sounds = listOf(bell), selectedSoundId = bell.id)
+
+        val playing = state.handlePreview()
+
+        assertEquals(PlaybackState.PLAYING, playing.playbackState)
+        assertEquals(bell, playing.selectedSound)
     }
 
 }

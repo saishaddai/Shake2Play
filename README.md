@@ -2,20 +2,20 @@
 
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
-**Shake2Play** is a Kotlin Multiplatform starter for Android and iOS, with a shared Compose Multiplatform UI. The generated starter screen is in place; motion-triggered sound playback is planned, not implemented yet.
+**Shake2Play** is a Kotlin Multiplatform app for Android and iOS, with a shared Compose Multiplatform soundboard. The Android app can preview bundled sounds and play the selected sound when the user enables shake detection. iOS capability adapters and runtime support are still outstanding.
 
 ---
 
 ## 📱 About the Project
 - **Configured:** Android and iOS Kotlin Multiplatform targets with a shared Compose UI.
-- **Planned:** motion-triggered sound playback and the platform integrations it requires.
-- **Tested:** shared soundboard empty and populated state using `kotlin.test` in `commonTest`.
+- **Implemented:** Android shake detection, bundled sound playback, sound selection, preview, and shared capability/error states.
+- **Tested:** shared soundboard states and sound-resource mapping using `kotlin.test` in `commonTest`.
 
 ---
 
 ## 🎯 Goals
 - Build a clean, scalable Android and iOS application using Kotlin Multiplatform and Compose Multiplatform.
-- Add motion-based sound playback in a later feature iteration.
+- Deliver a shared soundboard with platform-specific motion-triggered playback.
 
 ---
 
@@ -39,7 +39,7 @@ Shared UI and platform-independent logic belong in `shared/src/commonMain`. Andr
    ```bash
    ./gradlew :androidApp:assembleDebug
    ```
-4. Run the app on an Android emulator or device from Android Studio. Motion-triggered playback is not implemented yet.
+4. Run the app on an Android emulator or device from Android Studio. Select a sound, preview it, or start listening and shake to play it.
 
 For current test commands and host limitations, see [docs/build-and-test.md](docs/build-and-test.md).
 
@@ -64,7 +64,7 @@ adb devices
 adb shell am start -n com.saishaddai/.MainActivity
 ```
 
-`adb devices` should list the target device before installing. The app opens on the shared Shake2Play home screen; motion-triggered playback is not implemented yet.
+`adb devices` should list the target device before installing. The app opens on the shared Shake2Play soundboard. Select a sound to preview it, or start listening and shake to play it.
 
 If installation fails with `Requested internal only, but not enough space`, free internal storage on the device or emulator and retry `./gradlew :androidApp:installDebug`.
 
@@ -88,4 +88,3 @@ If you find this project helpful or inspiring:
 
 
 ---
-

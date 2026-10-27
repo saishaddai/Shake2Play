@@ -23,8 +23,8 @@ Run commands from the repository root using the checked-in wrapper:
 | Command | Purpose | Current status |
 | --- | --- | --- |
 | `./gradlew :shared:compileCommonMainKotlinMetadata` | Compile shared common Kotlin metadata | Passed on 2026-10-12 |
-| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-26 with the Android sound player and shake detector |
-| `./gradlew :shared:testAndroidHostTest` | Run common tests and Android host tests on the host JVM | Passed on 2026-10-26; includes bundled sound-resource mapping coverage |
+| `./gradlew :androidApp:assembleDebug` | Build the Android debug app | Passed on 2026-10-27 with the shared soundboard screen, presenter, Android sound player, and shake detector |
+| `./gradlew :shared:testAndroidHostTest` | Run common tests and Android host tests on the host JVM | Passed on 2026-10-27; includes presenter behavior and bundled sound-resource mapping coverage |
 | `./gradlew :shared:allTests` | Run configured shared tests across targets | Not completed on this Intel Mac; the aggregate includes iOS simulator work unavailable on this host |
 
 Gradle task discovery with `./gradlew tasks --all` succeeded. The Android SDK is configured locally through `sdk.dir` in the ignored `local.properties`; do not commit machine-specific SDK paths.
@@ -39,7 +39,7 @@ adb devices
 adb shell am start -n com.saishaddai/.MainActivity
 ```
 
-The app was launched successfully on Android in checklist step 2. No device was attached during the 2026-10-20 verification, so the launch was not repeated alongside the build and test checks.
+The app was launched successfully on Android in checklist step 2. No device was attached during the 2026-10-27 verification, so the updated shared soundboard interactions were not rechecked on a device or emulator.
 
 ## Deferred feature boundary
 

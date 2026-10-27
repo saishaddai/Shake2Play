@@ -33,12 +33,12 @@ Assumption: Android is the first runnable target, as in the first iteration. The
 
 ## 4. Connect the shared screen
 
-- [ ] Replace the empty-state-only shell with the agreed sound list and selection/preview controls.
-- [ ] Add an explicit listening control and show whether shake detection is active.
-- [ ] Render empty, unavailable-sensor, and playback-error states without crashing or silently dropping the user's action.
-- [ ] Keep UI state and event handling in the feature's established presentation boundary; do not start sensor or playback work during composition.
+- [x] Replace the empty-state-only shell with the agreed sound list and selection/preview controls.
+- [x] Add an explicit listening control and show whether shake detection is active.
+- [x] Render empty, unavailable-sensor, and playback-error states without crashing or silently dropping the user's action.
+- [x] Keep UI state and event handling in the feature's established presentation boundary; do not start sensor or playback work during composition.
 
-**Done when:** the same shared screen can select and preview sounds and clearly represent the Android capability state.
+**Done when:** the same shared screen can select and preview sounds and clearly represent the Android capability state. The Android app injects its lifecycle-bound adapters; platforms without injected adapters explain that shake detection or playback is unavailable.
 
 ## 5. Verify and record the Android slice
 
