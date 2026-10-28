@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SONIC PULSE | Shake to Play</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#ff6b99",
+              "on-background": "#ffffff",
+              "secondary-container": "#006875",
+              "error": "#ff6e84",
+              "on-primary": "#340090",
+              "background": "#0e0e0e",
+              "primary-container": "#a98fff",
+              "on-primary-fixed-variant": "#32008a",
+              "surface-container-high": "#20201f",
+              "on-secondary": "#004d57",
+              "primary": "#b6a0ff",
+              "surface-dim": "#0e0e0e",
+              "on-primary-container": "#280072",
+              "surface": "#0e0e0e",
+              "tertiary-container": "#ff097d",
+              "on-tertiary-container": "#000000",
+              "error-container": "#a70138",
+              "outline": "#767575",
+              "secondary-fixed": "#26e6ff",
+              "primary-fixed": "#a98fff",
+              "surface-container-lowest": "#000000",
+              "surface-container-low": "#131313",
+              "primary-dim": "#7e51ff",
+              "on-secondary-fixed-variant": "#005964",
+              "tertiary-dim": "#e4006e",
+              "tertiary-fixed-dim": "#ff769f",
+              "on-surface-variant": "#adaaaa",
+              "inverse-primary": "#6834eb",
+              "on-primary-fixed": "#000000",
+              "surface-variant": "#262626",
+              "on-secondary-fixed": "#003a42",
+              "on-tertiary-fixed": "#380016",
+              "on-error-container": "#ffb2b9",
+              "on-tertiary": "#47001e",
+              "surface-tint": "#b6a0ff",
+              "error-dim": "#d73357",
+              "surface-container": "#1a1a1a",
+              "tertiary-fixed": "#ff8ead",
+              "inverse-on-surface": "#565555",
+              "outline-variant": "#484847",
+              "secondary-dim": "#00d4ec",
+              "on-secondary-container": "#e8fbff",
+              "primary-fixed-dim": "#9c7eff",
+              "inverse-surface": "#fcf9f8",
+              "on-surface": "#ffffff",
+              "surface-container-highest": "#262626",
+              "secondary-fixed-dim": "#00d7f0",
+              "on-error": "#490013",
+              "on-tertiary-fixed-variant": "#760036",
+              "secondary": "#00e3fd",
+              "surface-bright": "#2c2c2c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Be Vietnam Pro"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shake-glow {
+            box-shadow: 0 0 60px 10px rgba(182, 160, 255, 0.3);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary selection:text-on-primary overflow-hidden">
+<!-- Hero Background Layer -->
+<div class="fixed inset-0 z-0 h-screen w-screen overflow-hidden">
+<div class="absolute inset-0 bg-black/60 z-10 backdrop-blur-sm"></div>
+<img class="w-full h-full object-cover grayscale opacity-80 mix-blend-screen" data-alt="Abstract cinematic visualization of sound waves in deep neon violet and cyan, floating in a dark cosmic void with subtle light particles" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDcLfozd4iZGC3E-4HB-ph0i3qZAtgOTbbb2LcNUbVQIB80G1DyhXp0kU-ovLN0I0WIDoYRw-KWYGHLLYSJk8hPihgqjhp6g466qFDTmVWI1xz29Fw9FHOUsSmdaDPV44pJuRfPFAcRfOFAKvT5l942lYh4-SSVYS042dPVt_oszBTYevLJ43y9qPrciMBguHyZey2KRLs0VLgsTWKdA-F86g59uwl0MSDtI3PrvZvm_s6O1nE_FSYcjA1UgANso-9f4ZHmw_zUH2n"/>
+<!-- Radial Gradient for Depth -->
+<div class="absolute inset-0 z-20 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.8)_100%)]"></div>
+</div>
+<!-- Header / Top Bar -->
+<!-- SUPPRESSED TopAppBar based on "Task-Focused" rule: Back action implies temporary departure -->
+<header class="fixed top-0 left-0 w-full z-50 px-6 py-8 flex items-center justify-between">
+<button aria-label="Go back" class="w-12 h-12 flex items-center justify-center bg-surface-variant/40 backdrop-blur-xl rounded-full border border-outline-variant/15 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-on-surface" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex items-center gap-2 px-4 py-2 bg-surface-variant/40 backdrop-blur-xl rounded-full border border-outline-variant/15">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-label uppercase tracking-widest text-on-surface-variant">Sound Ready</span>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-30 h-screen flex flex-col items-center justify-center px-8">
+<!-- Kinetic Center Element -->
+<div class="relative group">
+<!-- Decorative Glow Rings -->
+<div class="absolute inset-0 -m-8 rounded-full border border-primary/20 scale-110 opacity-50"></div>
+<div class="absolute inset-0 -m-16 rounded-full border border-tertiary/10 scale-125 opacity-30"></div>
+<!-- Shake Trigger Container -->
+<div class="relative w-64 h-64 md:w-80 md:h-80 bg-surface-container-highest/40 backdrop-blur-3xl rounded-xl border border-primary/30 flex items-center justify-center shake-glow transition-all duration-500 hover:scale-[1.02] active:scale-95">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-[80px] md:text-[100px] mb-4" data-icon="vibration" style="font-variation-settings: 'FILL' 1;">vibration</span>
+<!-- Decorative Wave Visualizer (Static) -->
+<div class="flex items-center gap-1 h-8">
+<div class="w-1 h-4 bg-primary rounded-full opacity-40"></div>
+<div class="w-1 h-6 bg-primary rounded-full opacity-60"></div>
+<div class="w-1 h-8 bg-primary rounded-full"></div>
+<div class="w-1 h-5 bg-primary rounded-full opacity-70"></div>
+<div class="w-1 h-3 bg-primary rounded-full opacity-30"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Typography Branding -->
+<div class="mt-16 text-center">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl tracking-tighter text-on-surface uppercase mb-4 drop-shadow-2xl">
+                SHAKE TO PLAY
+            </h1>
+<p class="font-body text-on-surface-variant text-lg tracking-wide max-w-xs mx-auto opacity-80 leading-relaxed">
+                Unlock the <span class="text-primary font-bold">Midnight Pulse</span> sound by moving your device.
+            </p>
+</div>
+<!-- Meta Details Section (Asymmetric Bento Style) -->
+<div class="mt-auto mb-12 w-full max-w-md grid grid-cols-2 gap-4">
+<div class="bg-surface-container/60 backdrop-blur-lg rounded-lg p-5 border border-outline-variant/10">
+<span class="block font-label text-[10px] uppercase tracking-[0.15em] text-primary mb-2">Duration</span>
+<span class="text-xl font-headline font-bold text-on-surface">04:22</span>
+</div>
+<div class="bg-surface-container/60 backdrop-blur-lg rounded-lg p-5 border border-outline-variant/10">
+<span class="block font-label text-[10px] uppercase tracking-[0.15em] text-secondary mb-2">Category</span>
+<span class="text-xl font-headline font-bold text-on-surface">Ambient</span>
+</div>
+<div class="col-span-2 bg-gradient-to-r from-primary-dim/20 to-transparent backdrop-blur-lg rounded-lg p-5 border border-primary/10 flex items-center justify-between">
+<div>
+<span class="block font-label text-[10px] uppercase tracking-[0.15em] text-on-surface-variant mb-1">Current Active Clip</span>
+<span class="text-lg font-headline font-bold text-on-surface italic tracking-tight">VIOLET RESONANCE</span>
+</div>
+<span class="material-symbols-outlined text-primary" data-icon="graphic_eq">graphic_eq</span>
+</div>
+</div>
+</main>
+<!-- Navigation Shell Suppressed per "Task-Focused" rule -->
+<!-- Global Visual Effects -->
+<div class="fixed top-1/4 -left-20 w-80 h-80 bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-tertiary/10 rounded-full blur-[100px] pointer-events-none"></div>
+</body></html>
