@@ -1,0 +1,234 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>SONIC PULSE | Sound Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#ff6b99",
+              "on-background": "#ffffff",
+              "secondary-container": "#006875",
+              "error": "#ff6e84",
+              "on-primary": "#340090",
+              "background": "#0e0e0e",
+              "primary-container": "#a98fff",
+              "on-primary-fixed-variant": "#32008a",
+              "surface-container-high": "#20201f",
+              "on-secondary": "#004d57",
+              "primary": "#b6a0ff",
+              "surface-dim": "#0e0e0e",
+              "on-primary-container": "#280072",
+              "surface": "#0e0e0e",
+              "tertiary-container": "#ff097d",
+              "on-tertiary-container": "#000000",
+              "error-container": "#a70138",
+              "outline": "#767575",
+              "secondary-fixed": "#26e6ff",
+              "primary-fixed": "#a98fff",
+              "surface-container-lowest": "#000000",
+              "surface-container-low": "#131313",
+              "primary-dim": "#7e51ff",
+              "on-secondary-fixed-variant": "#005964",
+              "tertiary-dim": "#e4006e",
+              "tertiary-fixed-dim": "#ff769f",
+              "on-surface-variant": "#adaaaa",
+              "inverse-primary": "#6834eb",
+              "on-primary-fixed": "#000000",
+              "surface-variant": "#262626",
+              "on-secondary-fixed": "#003a42",
+              "on-tertiary-fixed": "#380016",
+              "on-error-container": "#ffb2b9",
+              "on-tertiary": "#47001e",
+              "surface-tint": "#b6a0ff",
+              "error-dim": "#d73357",
+              "surface-container": "#1a1a1a",
+              "tertiary-fixed": "#ff8ead",
+              "inverse-on-surface": "#565555",
+              "outline-variant": "#484847",
+              "secondary-dim": "#00d4ec",
+              "on-secondary-container": "#e8fbff",
+              "primary-fixed-dim": "#9c7eff",
+              "inverse-surface": "#fcf9f8",
+              "on-surface": "#ffffff",
+              "surface-container-highest": "#262626",
+              "secondary-fixed-dim": "#00d7f0",
+              "on-error": "#490013",
+              "on-tertiary-fixed-variant": "#760036",
+              "secondary": "#00e3fd",
+              "surface-bright": "#2c2c2c"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Be Vietnam Pro"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(38, 38, 38, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .bg-pulse-gradient {
+            background: linear-gradient(45deg, #b6a0ff, #7e51ff);
+        }
+        body {
+            background-color: #000000;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body text-on-surface selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-black/60 backdrop-blur-3xl shadow-[0_4px_30px_rgba(0,0,0,0.1)] flex items-center justify-between px-6 h-16 w-full max-w-none">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-violet-400" data-icon="graphic_eq">graphic_eq</span>
+<span class="text-violet-400 font-black italic tracking-tighter text-2xl uppercase font-headline">SHAKE 2 PLAY</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-zinc-500 hover:text-violet-300 transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+
+</div>
+</header>
+<main class="pt-24 px-4 max-w-5xl mx-auto pb-8">
+<!-- Hero Title -->
+<div class="mb-8">
+<h1 class="font-headline font-extrabold text-3xl tracking-tighter mb-2 text-on-surface">SOUND LIBRARY</h1>
+<p class="text-on-surface-variant font-medium text-sm tracking-wide uppercase opacity-70">20 High-Fidelity Clips Loaded</p>
+</div>
+<!-- Responsive Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Card 1 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Retro 8-bit aesthetic gaming console with neon lights and digital artifacts in a synthwave style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcx3A6SFZEfo2BbTp-yIosAj54uRZ8rQWJdqTQsLT9q2SN2RSdTIpGEGo61HzvPb_nj1XjWH0tZ25_fd7rZ8qzIyIJIqly5wEDlKmpRv2XuNNMbxlD3IE6VgK87RGawHC_-CklDg6NU93tyzmcJtbCsarGS6xsRdw5eWChBrl-KxUGALKtqL_rgjcjzQUvzXhIFp0pB7oRlFn7QR5ORd9b81hkasqDgxaQ8e8y_hARsBTm0aTecaCtFRtp7gHQbVLoJEYM_eb27AFf">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+<div class="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+<div class="bg-pulse-gradient p-2 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-white text-sm" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract vibrant sound waves visualizing electronic music frequencies with magenta and cyan glows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJOECsHI7lPyvwNY3KC7vDKnUm1WYeP2I0OWqsHUzAdtYDwzlyqot9cnXiN44itbcalEc7bAjfx8n-Of2Xzr1nyGWrXL1_hojRoSJnkAomZhnC-hXOohdRBf3dirSMtbE-TEjEpRCO_vLxMs76VfZtzBU1UhgnjQTmhEGpUVjb7rc6DT5h1FN2cCY0PUyOhIL8SB3iB8gzYy8FqbxIHsJhKseHz_bvaDobEXO_A32HrCVqFYtfifCWRoVS6WJMLHdzNIzaNJzi1zY2">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 3 (Asymmetric tall) -->
+<div class="aspect-square md:row-span-2 md:aspect-auto rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up of professional audio mixing board faders in a dark studio with glowing indicator lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzmEBPZk91DK7aWnj7ocrcDO88Jiy_HBqMpVM47TxXquiXC5HcH0XT80jMxUdRHALSEd3nVgTSrWwVD1ER70t0-TDqAkaggrt7yo9QYpV9YaYTED0CV0yCC5j3P1vtoHJJADl8gOPIqUEHCPeCmSnsvwTrZbiSf4TNQklOGQxKWajS0JDsIXoTRPWv6BixpCcrUcwt7JzvdHPgnxIQeIe_f9nhLaHtGutdLvMl8NKTQZ4BHMt1A0_af2Zpl5DRXx1sQ_gDE9sHQi1p">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 4 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Vintage microphone on a stand in a dim jazz club with soft bokeh background lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK0nB3TgDEJbIAzzDSvCPTOjZfQHTAnqEkPP0LRQLDUI7YMr72BZ4YHt0MVfWWvPpaoGMbEYHeUBcig0rkOtubyCPt-xdPG0wJSVHouYD_3Ai44Gv1Xd8xEjaL849kpKyrBo2T5kbjKn38Qu1jAHWOUgjwEF0aO7QQdDbOK_r0Oi_QdUg0a5WZbo62JE0Tow3Y1L4n-q-0Dl1OL3opKo3gkzTCnLA6GldRowW7nK3fqtiiaMYOa1EMDgO5mO8fyWvHsAspoXAMpA_r">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 5 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Minimalist abstract background with deep violet and black silk-like textures and liquid highlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7dQs1Lgk3UsIRDRlfUrFP7ChxHMaCAfAKcB0N8L2IYAMB5gmLal_8vSK9MVwghRqeBIYu_rr6lLDji4qeGsry87KarIwhiLZx1v8PLXghpS0gCaKsQAFnXYMg2QOkLJroEww29OqFYcroxdlkGzVNGfaqY99o04UK_EN-z-ydKazoigIrGEB4ZXarSu9WuiennaSxTlByPw5KfBqcaMXy1KI67KsdFXw8l6yG4GCTkBE_nLdwfT_hiHibhZ7fFQxcQqSsZsMaELHc">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 6 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Hands of a DJ playing on a controller in a club with blue and purple ambient lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD967flkzfIbs_EF6i7mDFZWv-yd3u-SshrWVmNB-Ctf7PRg6yyEn6D4PuaYM2aWoupcuqv0LVv7jsdol_EhQbxzidgJmheXGaw9iuw-91GqJoni0wI-w8xzhqpuIs84gPd0b8k8zQip5ORnxTMXh-rpjyBFFwpUzLP9ZyBKcUzV1gEwyrBuYrlOg-BveMbZwvausTSd91R8KMRrVb3X7ZnXdnB27aWE1ok8X_lc6bwNJ9W-ny4yuOyd9sFJUyAzUIoFUScsM69GjqU">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 7 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Crowd at a music festival with colorful laser beams piercing through the dark hazy air" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuFwwZlIyy8kby4N9l6qzohU82ETQ81mjIPMK8LK8NR_C0aJx8FZTBRAkb5dUmDed1iQgCECVqkKbNa6rDRDWy4p6YcBUdVAkh28tU-LQqh0HGUE5S7uT5FZt4CjpmF4pP8Vy-mrZWnqkvmnhJGKMwil2vNx9iR8-5HxkmaY-f3JkEvtrWBqA95fYKPqrWlP3qv2eHuiZHUXXT0Otq5TY4CS8FPUuW0J8-DK2Otlk_kmPweyl4Ofdss9ldrXQRwxhd5vgYH7iosXpv">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 8 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Cinematic shot of a single electric guitar against a dark wall with dramatic rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdT7jnhrap1Gru9Jb88X5blROddU58ShXlal-gGW7V3xU4G_bt_IB8W2pbM3ALg7x5tEZFqBKIUFijB2rakFg_MtBXLTeVD6UExXejsAFoFDSYb4gWp7m12R36UtZMynj6VrX1YZ0-Kps_kkulbYDYq7JjJhj88CAyBUuOHuq1CShOLCfgfWA59WXijRWz2c9FPhmLU8lVyFAo8VhIk2_6_8Wpk1SpGn7lkz5rW26NLDrwpIStZoWQWc4HDmsMMsrgHnkN32JXSVP8">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 9 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Futuristic audio interface concept with glowing neon circles and digital playback controls" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsjEKTO5-BA8uI3FKHA2Y1m3COKLF-g7GzqiLejMKS4mktg3KyXRI54-xxbO_PF6xrIRCcFJ4Eh5aY47N1fQYiTZEN9dKzmkw3bo-2_CTBUvLvL3a382yLYSgbmhBGiVF1mhYqeF73AJuYkZ3UzTOMA_9lQm3ESvme-QCYuSgUHZVSR5pEHEU95MEKfSCimE1VDSpABAzOmq6Fq8ymou0XvtMxjGUvZnDuKEQApMOj4H-4fidIkzXca_C0h9gRPoK98nd59dmxD6iN">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 10 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Portrait of a person wearing large over-ear headphones with colorful lights reflected on their face" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2bxKDTLXnpat2_zoNdssGoafj27AqgO65DzSHlqyAbD2Y0RDZqbtDrHEZ4qSUMmx0QDUFSa6w-hvGiFCaZM8uAhfTEEc9g3_0XrUPEr2rddeZvIe6GxP54Zax1-zFQZvGLiE2JzzbrKryedtAcJWuxUnqDyABpbaJ7nGBjCaqkVvFqrlsxT-udzt3Z6KdkLMLYkgAmFjHT3dC4jzS7_kpYF50b20MVsKzWUf_PO8KQUOh5j7jBS-T_MlwYat3zZqkI-wUllUs-2Jc">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 11 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Silhouette of a performer on stage under a bright white spotlight with theatrical smoke" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBi0cW2cUbtPKh2g7gDRJct2RB4z_ouw4LV7FFyBsKETbgx881gv1P0cXsX9WjPKDXj4x4jwsDoTWyU1wa9m2psc7Hp7VFKezUaq9pZdtXQN5xO6jIFl1-UiMAWReAZkelq8g9_hA76RezQnNg0Yh8R2hWjZm51N0m7kzGwlPn6i1_hmEmew5UNvakzzf96YGBoAHCX45VCZj0NMkFwiIikdSwsSNX7D0QVjInQ_c0MlUNS_imaZFCe6Oy2LP2xPPpO15jPSNRfBTyY">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 12 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Dynamic close-up of vinyl record spinning on a turntable with blurred motion and warm lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA6FDJTU0K8r_HDLvicBlAbQeMBFLd6nX1fbpQAPCWh5tciN4i2Gn1sfBae0ZUDoPFNHzsY8-Bk1W3zpEO-TLtvzB82j0sFvytuFbOxAWuaKQ5h1pvKwgS9_yVW2CFhpJBoAfjoY81PLu6hFyz4FL4PsoUwlfZVexIzeoDmD4gCSExNKzSiPf-BFKmfrC9PiJ1PpaXC1TJozrrBZv2NO3LGVw3PobhWhVTFkiLgZJgpNu4Y3PG5thnA5qqoR3sSFrS4hDeUT0andTB">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 13 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Loudspeakers stacked in a wall with a moody shadow-heavy aesthetic and industrial feel" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjFEwwPxEvt2bB1Ha-_Rk8jvXfAXZmrxFZnWYD879sNs4slY991ZPRNLRHgmCohuE_S47RWtMzi-k9VZhdMn9jycPwv601T_UWSjMWHUtnReWIN0KJnptcRAuT2QcfT6i1g_4TQX50UdGuMvR9Xn42QdeOkGQ_BQpDozzfHFk-qp2m8PeA11aezldlcCIzkd5o3JfM-MwzSmud42nSbH3VOkJRVYUnvpuXPp2EdffrpeQjRarkXKrZoqp_HKXm-r92IxWdYQizVVjd">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 14 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract fire and ice contrasting elements swirling together with vibrant orange and blue glows" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtPWvD083zGrlgxlActnQ63w_STYFoa6aOGST2TTVo3HQsscvu-WrQ5ATE_bCTYNFuxN44hbFBLFEuqRUcA83FMN-yD5Dpf-RKsWl_tpVBNMFwjONHl6DEM5nQVMlKOBkjHnjNC2420VIw_Ogp7-Vjwj89GMCt9WGomIVDZND8oUUnb3LYgBLHt6QY2CfnBWWfalc7gFwvAP-d_WRNA0y5GsxuUEJTRw8RpT3tLTW1DJv605Tp3gbx_LFu8D09YYnTJRiokEYUZVgE">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 15 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="High-speed photograph of colorful liquid paint splashing in a dark space creating intricate shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5d2JF-H4swuXIMmfK0wkuliD85RK-CWTX5TrcxcnwW0nmF2ImF4F_eBNkgYeCW0vkqexmHg8wFVH4SXu3KnhdcY9JjzAIBpXHiu1YylIJrrLMyPsVYeukjY1eMP_v4PJjsYVtyxyNR44fSYmBTvHWw2C9g2bzxTZ4oegOS9JPltXp1d58NsLxPriHu1edxZM-W3oKXKZbOPtiqPjLBh1-phiFBzU0h9c0B20TPW8vvnJ5O_OrpmgXPiwnJLvk1x5jyTa2Y5yrm2pU">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 16 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up of a tape cassette reel spinning in a retro player with analog grain and textures" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5TyodtdUU2HeA8rhA_ndH34pAS8QmBGb2lZ9ZH70KMjDxOTcJDR8JSebEUJvzuyilxwerfUaeBYMCxCvDWM4ZjQwGtAl14NzF260v3KZc-ByH72EHuzNfGCPATzrPpxcxAee5_wZmuZaraxCUaA7x1d6zqaDalXSDvrCxHAHwMKX2NMByetX8elQpslljJY5_4fNkvX_K7fOiAoaEUepRT43ZVcQgmwuME-uJg4fZpQRrwrtamy9IxnZfOZldT8rEzXgQUFbqQ3t">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 17 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Macro shot of a human eye with digital code and circuit patterns reflected in the pupil" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPy7PJ6y3zjhq3L4fCdCylpSIh0To2n1VD-LOVG1ruHN6F7zAcYYoSCSEk3t98th7wX-OA5uJVI_GEzVLmBJUSMC44TXLl6l9DoQqe6ahfWTsPpKhtGKWVtgW9PTsZF5PtGLNiqewxaOL6RC3pq82JGMOV-F7C8KO-G_fu014okBq3HCfx4mxb6yvRJweFBrTQUpFHkoKGQnnwynTpvsoYQs3qiAASTzBpRWEdXgmuHRB5_gf2_7M76ysA5H13cEwNeJUw39IStrhN">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 18 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Abstract 3D topography map with neon blue lines on a dark black background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCeU49mKEgxMn5KWKHDsuXWiNlPIZtvt1e_UgvE20IKsTas3Z-gA574ruayIAMkp2bz_TzeyLCJR1rImMjepHegEZryaCUqOhzAITyW08xPbV23VFTZYLQgUDkmjqkg0tKTNuNMp3OYQnuU6PeU3xVmBYv4F0mz1eMYa16S1a3ueeBDnGSvCOi7KnVnUwyfVV3zyUtWtHnag5svBesW06X9gwl3do2AZZGK-eQeRqzRODPlCtb8aBzQ-Gi2TseOSZAqyPlZVRRq7_I">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 19 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Musician playing a piano in a dark room with a single source of warm golden light on the keys" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFa7ymC_MDMkX5B6YRrutuN1Zjo7oYNiscrih916y-H6HrDkSSTPGNRV-oKgZrJ1gRgG1Kp-traPzEFDcdtzT6b5QTQUr3dEGHrLn2Z1Rts9biVVm0AK-YhXLpz9flKR4MX_OimzUZ8cPgy09xGh08OPfXk3ZyN8ueGri8-DqNcyb4ph3l5T4QI4IcezI6siEAe_jXQSOSfGg4CsiaGCfL-PpwX0sD0Lp61DCVMmUF3oMMc3RFMO6yn4LQ6JnvzUR6iVK_en4a_NMa">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+<!-- Card 20 -->
+<div class="aspect-square rounded-lg relative overflow-hidden group active:scale-95 transition-transform duration-200">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="The earth seen from space at night with city lights glowing like a network of synapses" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAO-LYDGlzbzkPETGZQwwIMGSe1yL8r9yQ7-vR5W5px6eToXj4GCSe9msPn2SN69iIn8-8sP_eXK4CeIOvNUnLTpCg55wAsIBOlcMFgWHHY84Wt13S-VsQOyqOHkLYEmDOq9oAoZPZWR2eq2Z2xHBjTKo_Wsg4R8TTgY4Bh0zYCENYeugdg_gAQJYuFWPDbowLfAVzItAvnzoIVZLvJDTknHI8_M1VocXcOjZcRH-twp4WQNEoEGg5RVm37E7oJbZMROaGkhyT2vhf">
+<div class="absolute inset-0 bg-black/20 group-hover:bg-primary/20 transition-colors duration-300"></div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+
+<!-- Floating Action Button (FAB) - Suppression logic: Primary action here is Playing, not adding, but a global FAB for "Recording" fits soundboard context -->
+
+
+
+</body></html>
