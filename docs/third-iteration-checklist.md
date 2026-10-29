@@ -6,13 +6,13 @@ Assumption: the five bundled clips and Android adapters are the current function
 
 ## 1. Turn the designs into implementable requirements
 
-- [ ] Use **Sound Library** and **Shake to Play** consistently for the two flows; keep the Kotlin names tied to their behavior.
-- [ ] Confirm which visible actions are in scope: library search, bottom navigation, and the recording/import action pictured in Sound Library.
-- [ ] Confirm the source of sound artwork and any additional clips. Keep shipped media local; do not use the design HTML's remote image URLs at runtime.
-- [ ] Decide whether duration and category are required sound metadata. Do not copy the mockup's sample values (such as “04:22”, “Ambient”, or “Violet Resonance”) into the five existing clips without real metadata.
-- [ ] Review the existing design-to-code map and record accepted behavior and deferred mockup-only elements in the per-screen READMEs.
+- [x] Use **Sound Library** and **Shake to Play** consistently for the two flows; keep the Kotlin names tied to their behavior.
+- [x] Confirm which visible actions are in scope: include search in Sound Library; defer the persistent bottom tabs and recording/import. Use selection and back navigation for the two flows rather than adding a tab bar.
+- [x] Confirm the source of sound artwork and any additional clips: retain the five existing bundled clips and use no artwork until approved local assets are provided. Keep shipped media local; do not use the design HTML's remote image URLs at runtime.
+- [x] Decide to defer duration and category metadata until reliable values exist. Do not copy the mockup's sample values (such as “04:22”, “Ambient”, or “Violet Resonance”) into the five existing clips.
+- [x] Review the existing design-to-code map and record accepted behavior and deferred mockup-only elements in the per-screen READMEs.
 
-**Done when:** each screen's controls and content have a defined behavior and data source, and unsupported or unapproved details are explicitly excluded.
+**Done when:** each screen's controls and content have a defined behavior and data source, and unsupported or unapproved details are explicitly excluded. Step 1 decisions are recorded in [the design-to-code map](design/README.md), [Sound Library README](design/sound_library/README.md), and [Shake to Play README](design/shake_to_play/README.md).
 
 ## 2. Establish the shared design foundation
 
