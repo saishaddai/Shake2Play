@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -52,7 +51,7 @@ fun App(
     val state = presenter.state
     val selectedSound = state.selectedSound
 
-    MaterialTheme {
+    Shake2PlayTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background,
@@ -65,28 +64,29 @@ fun App(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 Text(
-                    text = "Shake2Play",
+                    text = "SHAKE 2 PLAY",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
 
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(
-                        text = "SOUNDBOARD",
+                        text = "SOUND LIBRARY",
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.secondary,
                     )
                     Text(
                         text = "Your sounds",
                         style = MaterialTheme.typography.headlineLarge,
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
 
                 if (state.isEmpty) {
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = MaterialTheme.shapes.large,
+                        color = MaterialTheme.colorScheme.surfaceContainer,
                     ) {
                         Column(
                             modifier = Modifier.padding(20.dp),
@@ -104,18 +104,22 @@ fun App(
                         }
                     }
                 } else {
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                         state.sounds.forEach { sound ->
                             Button(
                                 onClick = { presenter.selectSound(sound.id) },
                                 modifier = Modifier.fillMaxWidth(),
+                                shape = MaterialTheme.shapes.large,
                                 enabled = state.playbackState != PlaybackState.PLAYING,
                                 colors = if (sound.id == state.selectedSoundId) {
-                                    ButtonDefaults.buttonColors()
+                                    ButtonDefaults.buttonColors(
+                                        containerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.onPrimary,
+                                    )
                                 } else {
                                     ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                        contentColor = MaterialTheme.colorScheme.onSurface,
                                     )
                                 },
                             ) {
@@ -128,15 +132,15 @@ fun App(
                 if (selectedSound != null) {
                     Surface(
                         modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(8.dp),
-                        color = MaterialTheme.colorScheme.surfaceVariant,
+                        shape = MaterialTheme.shapes.large,
+                        color = MaterialTheme.colorScheme.surfaceContainerLow,
                     ) {
                         Column(
                             modifier = Modifier.padding(20.dp),
                             verticalArrangement = Arrangement.spacedBy(10.dp),
                         ) {
                             Text(
-                                text = "Selected",
+                                text = "SELECTED",
                                 style = MaterialTheme.typography.labelMedium,
                                 color = MaterialTheme.colorScheme.secondary,
                             )
@@ -147,6 +151,7 @@ fun App(
                             OutlinedButton(
                                 onClick = presenter::previewSelectedSound,
                                 modifier = Modifier.fillMaxWidth(),
+                                shape = MaterialTheme.shapes.extraLarge,
                                 enabled = state.canPreview && soundPlayer != null,
                             ) {
                                 Text(
@@ -178,7 +183,12 @@ fun App(
                             }
                         },
                         modifier = Modifier.fillMaxWidth(),
+                        shape = MaterialTheme.shapes.extraLarge,
                         enabled = shakeDetector != null && !state.isEmpty,
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                        ),
                     ) {
                         Text(
                             text = when {

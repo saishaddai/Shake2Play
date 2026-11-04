@@ -16,12 +16,14 @@ Assumption: the five bundled clips and Android adapters are the current function
 
 ## 2. Establish the shared design foundation
 
-- [ ] Derive the colors, typography, spacing, surfaces, and shapes to implement from the design documents; avoid maintaining conflicting screen-specific versions of shared tokens.
-- [ ] Implement the shared styles with the Compose APIs and resources already configured for the project; add dependencies only if an accepted design requirement cannot be met otherwise.
-- [ ] Ensure the dark visual treatment, contrast, readable text scaling, and interactive states work across the configured Android and iOS shared UI targets.
-- [ ] Keep decorative effects such as blur and glow optional where they would reduce readability or are not supported consistently.
+- [x] Derive the colors, typography, spacing, surfaces, and shapes to implement from the design documents; avoid maintaining conflicting screen-specific versions of shared tokens.
+- [x] Implement the shared styles with the Compose APIs and resources already configured for the project; add dependencies only if an accepted design requirement cannot be met otherwise.
+- [x] Ensure the dark visual treatment, contrast, readable text scaling, and interactive states work across the configured Android and iOS shared UI targets.
+- [x] Keep decorative effects such as blur and glow optional where they would reduce readability or are not supported consistently.
 
 **Done when:** reusable Compose styling expresses the agreed design system and can be used by both flows without compromising accessibility or target compatibility.
+
+**Status update:** implemented a shared `Shake2PlayTheme` in `shared/src/commonMain/kotlin/com/saishaddai/Shake2PlayTheme.kt` and applied it in `App()`. The theme centralizes the dark neon palette, typography, and rounded surfaces for the shared Sound Library/Shake to Play screen foundation while preserving compatibility with the existing Compose Material3 setup.
 
 ## 3. Implement the Sound Library flow
 
