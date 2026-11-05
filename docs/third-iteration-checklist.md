@@ -27,13 +27,15 @@ Assumption: the five bundled clips and Android adapters are the current function
 
 ## 3. Implement the Sound Library flow
 
-- [ ] Create a focused shared `SoundLibraryScreen` composable using the approved content and the Sound Library design as its visual reference.
-- [ ] Show the actual available `SoundItem` entries; use bundled/local artwork only when approved assets exist, and do not imply that 20 clips are loaded when only five are present.
-- [ ] Wire item selection and preview to `SoundboardPresenter` and the existing shared soundboard state.
-- [ ] Implement search, navigation controls, and recording/import only if accepted in step 1; each displayed control must perform its stated action.
-- [ ] Preserve loading/empty and playback-error feedback where applicable, plus accessibility semantics for selection and preview.
+- [x] Create a focused shared `SoundLibraryScreen` composable using the approved content and the Sound Library design as its visual reference.
+- [x] Show the actual available `SoundItem` entries; use bundled/local artwork only when approved assets exist, and do not imply that 20 clips are loaded when only five are present.
+- [x] Wire item selection and preview to `SoundboardPresenter` and the existing shared soundboard state.
+- [x] Implement search, navigation controls, and recording/import only if accepted in step 1; each displayed control must perform its stated action.
+- [x] Preserve loading/empty and playback-error feedback where applicable, plus accessibility semantics for selection and preview.
 
 **Done when:** users can browse the real sound library, select a sound, and preview it; every control shown in this flow is functional or intentionally omitted.
+
+**Status update:** extracted the shared library UI into `SoundLibraryScreen`, added case-insensitive title search and no-match feedback, and retained selection, preview, unavailable-audio, and playback-error behavior. Navigation to Shake to Play remains in step 4; deferred recording/import, bottom tabs, and artwork are intentionally omitted.
 
 ## 4. Implement the Shake to Play flow and screen transition
 

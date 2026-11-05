@@ -21,11 +21,11 @@ The Sound Library design is the entry flow for browsing sounds, selecting one, a
 
 | Design behavior | Project name | Status |
 | --- | --- | --- |
-| Sound library list | `App()` and `SoundboardState.sounds` | Existing shared screen uses sound-title buttons; it is not yet the designed image grid. |
+| Sound library list | `SoundLibraryScreen` and `SoundboardState.sounds` | Shared screen displays the actual available sound titles; it does not imply the mockup's 20 clips or use unapproved artwork. |
 | Sound item title | `SoundItem.title` | Existing model field. |
-| Select a sound | `SoundboardPresenter.selectSound()` and `SoundboardState.selectedSoundId` | Existing selection behavior; screen transition is planned. |
-| Preview selected sound | `SoundboardPresenter.previewSelectedSound()` and `SoundPlayer` | Existing behavior; preview control is on the current shared screen. |
-| Search sounds | No existing project symbol | Accepted work for this iteration; search should filter the existing list without changing the sound library. |
-| Empty and playback error feedback | `SoundboardState` and `App()` | Existing shared states and feedback. |
+| Select a sound | `SoundLibraryScreen`, `SoundboardPresenter.selectSound()`, and `SoundboardState.selectedSoundId` | Implemented; selected state is exposed to accessibility services. Screen transition is planned for step 4. |
+| Preview selected sound | `SoundLibraryScreen`, `SoundboardPresenter.previewSelectedSound()`, and `SoundPlayer` | Implemented; platform unavailability is explained and the action is disabled when no player is injected. |
+| Search sounds | `SoundLibraryScreen` and `filterSoundItems()` | Implemented as case-insensitive title filtering over the existing list; an empty search restores all entries and no-match feedback is shown. |
+| Empty and playback error feedback | `SoundLibraryScreen`, `SoundboardState`, and `App()` | Empty library and search no-match states are distinct; playback status and error feedback remain visible in `App()`. |
 
 The design's artwork grid, recording button, and bottom tabs are not requirements for this iteration. Do not add inactive controls.

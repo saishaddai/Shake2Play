@@ -15,12 +15,12 @@ These names distinguish the library flow from the playback flow without calling 
 
 | Design element or behavior | Existing project element | Current status |
 | --- | --- | --- |
-| Sound library heading and list | `App()` in `shared/src/commonMain/kotlin/com/saishaddai/App.kt`; `SoundboardState.sounds` | Rendered as a list of buttons, not the pictured image grid. |
-| Sound library search | No current search UI or state | Accepted for this iteration; not implemented yet. Search only the five bundled clips. |
+| Sound library heading and list | `SoundLibraryScreen` in `shared/src/commonMain/kotlin/com/saishaddai/feature/soundboard/SoundLibraryScreen.kt`; `SoundboardState.sounds` | Renders the actual available titles as a list of selectable buttons, not the pictured image grid. |
+| Sound library search | `SoundLibraryScreen` and `filterSoundItems()` | Implemented as case-insensitive filtering over available sound titles; the full list returns when the query is blank. |
 | Sound item title | `SoundItem.title` in `feature/soundboard/SoundboardState.kt` | Implemented. |
 | Selected sound | `SoundboardState.selectedSoundId` and `selectedSound` | Implemented. |
-| Selecting an item | `SoundboardPresenter.selectSound()` | Implemented. |
-| Preview action | `App()` preview button and `SoundboardPresenter.previewSelectedSound()` | Implemented for the injected `SoundPlayer`. |
+| Selecting an item | `SoundLibraryScreen` and `SoundboardPresenter.selectSound()` | Implemented; selected state is exposed to accessibility services. |
+| Preview action | `SoundLibraryScreen` and `SoundboardPresenter.previewSelectedSound()` | Implemented for the injected `SoundPlayer`; unavailable audio is communicated and preview is disabled. |
 | Listening state and shake status | `SoundboardState.isListening`, `shakeAvailability`; `App()` listening control and status message | Implemented. |
 | Shake-triggered playback | `SoundboardPresenter.startListening()` with `ShakeDetector`; `SoundboardState.handleShake()` | Implemented through the Android adapter. |
 | Playback status and errors | `PlaybackState`, `PlaybackFailure`, and `SoundboardPresenter` | Implemented; rendered in `App()`. |
@@ -30,7 +30,7 @@ These names distinguish the library flow from the playback flow without calling 
 | Persistent bottom tabs and recording/import action | No corresponding shared UI or capability | Deferred; navigate between the two flows by selecting a sound and returning from playback. |
 | Separate playback page | No corresponding shared UI or navigation element | Intended flow for this iteration; currently the soundboard is still one screen. |
 
-`App()` currently owns the shared Compose presentation and constructs the `SoundboardPresenter`; it is not yet split into `SoundLibraryScreen` and `ShakeToPlayScreen` composables. `SoundPlayer` is a playback capability contract, not a screen.
+`App()` owns the shared presentation shell and constructs the `SoundboardPresenter`; the Sound Library UI is extracted into `SoundLibraryScreen`, while the Shake to Play screen and transition remain planned for step 4. `SoundPlayer` is a playback capability contract, not a screen.
 
 ## Implementation plan
 
