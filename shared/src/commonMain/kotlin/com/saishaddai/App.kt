@@ -10,7 +10,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,6 +24,7 @@ import com.saishaddai.feature.soundboard.PlaybackState
 import com.saishaddai.feature.soundboard.ShakeAvailability
 import com.saishaddai.feature.soundboard.ShakeDetector
 import com.saishaddai.feature.soundboard.SoundItem
+import com.saishaddai.feature.soundboard.SoundLibraryScreen
 import com.saishaddai.feature.soundboard.SoundPlayer
 import com.saishaddai.feature.soundboard.SoundboardPresenter
 
@@ -63,115 +63,12 @@ fun App(
                     .padding(horizontal = 24.dp, vertical = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
-                Text(
-                    text = "SHAKE 2 PLAY",
-                    style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary,
+                SoundLibraryScreen(
+                    state = state,
+                    soundPlayerAvailable = soundPlayer != null,
+                    onSelectSound = presenter::selectSound,
+                    onPreviewSound = presenter::previewSelectedSound,
                 )
-
-                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                    Text(
-                        text = "SOUND LIBRARY",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.secondary,
-                    )
-                    Text(
-                        text = "Your sounds",
-                        style = MaterialTheme.typography.headlineLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                }
-
-                if (state.isEmpty) {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = MaterialTheme.shapes.large,
-                        color = MaterialTheme.colorScheme.surfaceContainer,
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(20.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp),
-                        ) {
-                            Text(
-                                text = "No sounds yet",
-                                style = MaterialTheme.typography.titleMedium,
-                            )
-                            Text(
-                                text = "Your sound library will appear here.",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            )
-                        }
-                    }
-                } else {
-                    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                        state.sounds.forEach { sound ->
-                            Button(
-                                onClick = { presenter.selectSound(sound.id) },
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = MaterialTheme.shapes.large,
-                                enabled = state.playbackState != PlaybackState.PLAYING,
-                                colors = if (sound.id == state.selectedSoundId) {
-                                    ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.primary,
-                                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                                    )
-                                } else {
-                                    ButtonDefaults.buttonColors(
-                                        containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                        contentColor = MaterialTheme.colorScheme.onSurface,
-                                    )
-                                },
-                            ) {
-                                Text(text = sound.title)
-                            }
-                        }
-                    }
-                }
-
-                if (selectedSound != null) {
-                    Surface(
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = MaterialTheme.shapes.large,
-                        color = MaterialTheme.colorScheme.surfaceContainerLow,
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(20.dp),
-                            verticalArrangement = Arrangement.spacedBy(10.dp),
-                        ) {
-                            Text(
-                                text = "SELECTED",
-                                style = MaterialTheme.typography.labelMedium,
-                                color = MaterialTheme.colorScheme.secondary,
-                            )
-                            Text(
-                                text = selectedSound.title,
-                                style = MaterialTheme.typography.titleMedium,
-                            )
-                            OutlinedButton(
-                                onClick = presenter::previewSelectedSound,
-                                modifier = Modifier.fillMaxWidth(),
-                                shape = MaterialTheme.shapes.extraLarge,
-                                enabled = state.canPreview && soundPlayer != null,
-                            ) {
-                                Text(
-                                    text = if (state.playbackState == PlaybackState.PLAYING) {
-                                        "Playing..."
-                                    } else {
-                                        "Preview sound"
-                                    },
-                                )
-                            }
-                            if (soundPlayer == null) {
-                                Text(
-                                    text = "Audio playback is not available on this platform.",
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                )
-                            }
-                        }
-                    }
-                }
 
                 Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                     Button(
